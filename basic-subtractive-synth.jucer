@@ -2,9 +2,16 @@
 
 <JUCERPROJECT id="K78ZOw" name="basic-subtractive-synth" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
-              jucerFormatVersion="1">
+              jucerFormatVersion="1" companyName="Nick Suda" companyCopyright="2020 Nick Suda"
+              companyWebsite="nicksuda.com" companyEmail="nick.suda@gmail.com"
+              pluginFormats="buildVST3" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
+              headerPath="C:\Libraries\Maximilian\src">
   <MAINGROUP id="CQACSq" name="basic-subtractive-synth">
     <GROUP id="{ED3C2280-51CE-2C43-2974-031F27E3561A}" name="Source">
+      <GROUP id="{D70EF60B-681D-7F56-4A84-ED7D5DBA3AF2}" name="src">
+        <FILE id="E4KGB6" name="maximilian.cpp" compile="1" resource="0" file="../../../../Libraries/Maximilian/src/maximilian.cpp"/>
+        <FILE id="U3Rjp3" name="maximilian.h" compile="0" resource="0" file="../../../../Libraries/Maximilian/src/maximilian.h"/>
+      </GROUP>
       <FILE id="VNXhdE" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="stkoNk" name="PluginProcessor.h" compile="0" resource="0"
@@ -54,4 +61,7 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+  </LIVE_SETTINGS>
 </JUCERPROJECT>
