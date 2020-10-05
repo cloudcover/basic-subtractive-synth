@@ -9,6 +9,17 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "SynthSound.h"
+#include "SynthVoice.h"
+
+#define ENV1_ATTACK_ID "env1-attack"
+#define ENV1_ATTACK_NAME "Env 1 Attack"
+#define ENV1_DECAY_ID "env1-decay"
+#define ENV1_DECAY_NAME "Env 1 Decay"
+#define ENV1_SUSTAIN_ID "env1-sustain"
+#define ENV1_SUSTAIN_NAME "Env 1 Sustain"
+#define ENV1_RELEASE_ID "env1-release"
+#define ENV1_RELEASE_NAME "Env 1 Release"
 
 //==============================================================================
 /**
@@ -52,6 +63,9 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+
+    juce::AudioProcessorValueTreeState treeState;
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
 private:
     //==============================================================================

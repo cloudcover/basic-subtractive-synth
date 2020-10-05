@@ -19,13 +19,31 @@ BasicsubtractivesynthAudioProcessor::BasicsubtractivesynthAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+treeState(*this, nullptr, "PARAMETERS", createParameterLayout())
 #endif
 {
+    // initialize mySynth here
 }
 
 BasicsubtractivesynthAudioProcessor::~BasicsubtractivesynthAudioProcessor()
 {
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioProcessor::createParameterLayout()
+{
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    auto env1AttackParam = std::make_unique<juce::AudioParameterFloat>(ENV1_ATTACK_ID, ENV1_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
+    params.push_back(std::move(env1AttackParam));
+    auto env1DecayParam = std::make_unique<juce::AudioParameterFloat>(ENV1_DECAY_ID, ENV1_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
+    params.push_back(std::move(env1DecayParam));
+    auto env1SustainParam = std::make_unique<juce::AudioParameterFloat>(ENV1_SUSTAIN_ID, ENV1_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
+    params.push_back(std::move(env1SustainParam));
+    auto env1ReleaseParam = std::make_unique<juce::AudioParameterFloat>(ENV1_RELEASE_ID, ENV1_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
+    params.push_back(std::move(env1ReleaseParam));
+
+    return { params.begin(), params.end() };
 }
 
 //==============================================================================

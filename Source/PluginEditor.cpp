@@ -11,11 +11,16 @@
 
 //==============================================================================
 BasicsubtractivesynthAudioProcessorEditor::BasicsubtractivesynthAudioProcessorEditor (BasicsubtractivesynthAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+    : AudioProcessorEditor (&p), audioProcessor (p), env1Gui(p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (600, 400);
+
+    // add the component instance bindings here instead of in the Component's constructor
+    env1Gui.attackSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_ATTACK_ID, env1Gui.attackSlider);
+    env1Gui.decaySliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_DECAY_ID, env1Gui.decaySlider);
+    env1Gui.sustainSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_SUSTAIN_ID, env1Gui.sustainSlider);
+    env1Gui.releaseSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_RELEASE_ID, env1Gui.releaseSlider);
+    addAndMakeVisible(&env1Gui);
 }
 
 BasicsubtractivesynthAudioProcessorEditor::~BasicsubtractivesynthAudioProcessorEditor()
@@ -25,16 +30,15 @@ BasicsubtractivesynthAudioProcessorEditor::~BasicsubtractivesynthAudioProcessorE
 //==============================================================================
 void BasicsubtractivesynthAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void BasicsubtractivesynthAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    juce::Rectangle<int> area = getLocalBounds();
+
+    const int componentWidth = 200;
+    const int componentHeight = 200;
+
+    env1Gui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
 }
