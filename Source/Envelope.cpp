@@ -20,24 +20,28 @@ Envelope::Envelope(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
     attackSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     attackSlider.setRange(0.1f, 5000.0f);
     attackSlider.setValue(100.0f);
+    attackSlider.setPopupDisplayEnabled(true, true, this);
     addAndMakeVisible(&attackSlider);
 
     decaySlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     decaySlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     decaySlider.setRange(1.0f, 2000.0f);
     decaySlider.setValue(100.0f);
+    decaySlider.setPopupDisplayEnabled(true, true, this);
     addAndMakeVisible(&decaySlider);
 
     sustainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     sustainSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     sustainSlider.setRange(0.0f, 1.0f);
     sustainSlider.setValue(0.8f);
+    sustainSlider.setPopupDisplayEnabled(true, true, this);
     addAndMakeVisible(&sustainSlider);
 
     releaseSlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     releaseSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     releaseSlider.setRange(0.1f, 5000.0f);
     releaseSlider.setValue(1000.0f);
+    releaseSlider.setPopupDisplayEnabled(true, true, this);
     addAndMakeVisible(&releaseSlider);
 
     // don't create bindings to ValueTreeState yet, since these are instanced for two voices
