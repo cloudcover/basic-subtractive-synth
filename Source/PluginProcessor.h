@@ -12,6 +12,11 @@
 #include "SynthSound.h"
 #include "SynthVoice.h"
 
+#define OSC1_TYPE_ID "osc1-type"
+#define OSC1_TYPE_NAME "Osc 1 Type"
+#define OSC2_TYPE_ID "osc2-type"
+#define OSC2_TYPE_NAME "Osc 2 Type"
+
 #define ENV1_ATTACK_ID "env1-attack"
 #define ENV1_ATTACK_NAME "Env 1 Attack"
 #define ENV1_DECAY_ID "env1-decay"

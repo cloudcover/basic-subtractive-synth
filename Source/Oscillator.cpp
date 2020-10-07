@@ -12,11 +12,15 @@
 #include "Oscillator.h"
 
 //==============================================================================
-Oscillator::Oscillator()
+Oscillator::Oscillator(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
+    setSize(200, 200);
 
+    typeMenu.addItem("Sine", 1);
+    typeMenu.addItem("Saw", 2);
+    typeMenu.addItem("Square", 3);
+    typeMenu.setJustificationType(juce::Justification::centred);
+    addAndMakeVisible(&typeMenu);
 }
 
 Oscillator::~Oscillator()
@@ -25,27 +29,21 @@ Oscillator::~Oscillator()
 
 void Oscillator::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
+    //background stuff
+    juce::Rectangle<int> titleArea(0, 10, getWidth(), 20);
 
-       You should replace everything in this method with your own
-       drawing code..
-    */
+    g.fillAll(juce::Colours::black);
+    g.setColour(juce::Colours::white);
+    g.drawText("Oscillator", titleArea, juce::Justification::centredTop);
 
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    juce::Rectangle<float> area(25, 25, 150, 150);
 
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("Oscillator", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
+    g.setColour(juce::Colours::yellow);
+    g.drawRoundedRectangle(area, 20.0f, 2.0f);
 }
 
 void Oscillator::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
+    juce::Rectangle<int> area = getLocalBounds().reduced(40);
+    typeMenu.setBounds(area.removeFromTop(20));
 }

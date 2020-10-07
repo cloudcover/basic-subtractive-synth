@@ -34,6 +34,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
+    auto osc1TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC1_TYPE_ID, OSC1_TYPE_NAME, 0.0f, 2.0f, 0.0f);
+    params.push_back(std::move(osc1TypeParam));
+
     auto env1AttackParam = std::make_unique<juce::AudioParameterFloat>(ENV1_ATTACK_ID, ENV1_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
     params.push_back(std::move(env1AttackParam));
     auto env1DecayParam = std::make_unique<juce::AudioParameterFloat>(ENV1_DECAY_ID, ENV1_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
@@ -55,6 +58,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
     auto flt1ResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT1_RESONANCE_ID, FLT1_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
     params.push_back(std::move(flt1ResonanceParam));
 
+    auto osc2TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC2_TYPE_ID, OSC2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
+    params.push_back(std::move(osc2TypeParam));
+
     auto env2AttackParam = std::make_unique<juce::AudioParameterFloat>(ENV2_ATTACK_ID, ENV2_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
     params.push_back(std::move(env2AttackParam));
     auto env2DecayParam = std::make_unique<juce::AudioParameterFloat>(ENV2_DECAY_ID, ENV2_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
@@ -66,8 +72,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
 
     auto flt2TypeParam = std::make_unique<juce::AudioParameterFloat>(FLT2_TYPE_ID, FLT2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
     params.push_back(std::move(flt2TypeParam));
-    auto flt2CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT2_CUTOFF_ID, FLT2_CUTOFF_NAME, 20.0f, 10000.0f, 400.0f);
+
+    auto flt2CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT2_CUTOFF_ID, FLT2_CUTOFF_NAME, cutoffRange, 1000.0f, "Hz");
     params.push_back(std::move(flt2CutoffParam));
+    
     auto flt2ResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT2_RESONANCE_ID, FLT2_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
     params.push_back(std::move(flt2ResonanceParam));
 

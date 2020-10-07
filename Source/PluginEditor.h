@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "Envelope.h"
 #include "Filter.h"
+#include "Oscillator.h"
 
 //==============================================================================
 /**
@@ -31,6 +32,9 @@ private:
     // access the processor object that created it.
     BasicsubtractivesynthAudioProcessor& audioProcessor;
     
+    Oscillator osc1Gui;
+    Oscillator osc2Gui;
+
     Envelope env1Gui;
     Envelope env2Gui;
 
