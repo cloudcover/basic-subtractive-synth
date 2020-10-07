@@ -25,13 +25,14 @@ Filter::Filter(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
     cutoffSlider.setRange(20.0f, 10000.0f);
     cutoffSlider.setValue(400.0f);
     cutoffSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    cutoffSlider.setPopupDisplayEnabled(true, true, this);
     addAndMakeVisible(&cutoffSlider);
-    cutoffSlider.setSkewFactorFromMidPoint(1000.0f);
 
     resonanceSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     resonanceSlider.setRange(1.0f, 5.0f);
     resonanceSlider.setValue(1.0f);
     resonanceSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    resonanceSlider.setPopupDisplayEnabled(true, true, this);
     addAndMakeVisible(&resonanceSlider);
 }
 

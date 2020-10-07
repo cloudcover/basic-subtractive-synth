@@ -31,17 +31,11 @@ BasicsubtractivesynthAudioProcessorEditor::BasicsubtractivesynthAudioProcessorEd
     flt1Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, FLT1_TYPE_ID, flt1Gui.typeMenu);
     flt1Gui.cutoffSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT1_CUTOFF_ID, flt1Gui.cutoffSlider);
     flt1Gui.resonanceSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT1_RESONANCE_ID, flt1Gui.resonanceSlider);
-
-    // This has to happen after setting up the SliderAttachment. It's just an API/initialization order thing.
-    flt1Gui.cutoffSlider.setSkewFactorFromMidPoint(1000.0f);
     addAndMakeVisible(&flt1Gui);
 
     flt2Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, FLT2_TYPE_ID, flt2Gui.typeMenu);
     flt2Gui.cutoffSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT2_CUTOFF_ID, flt2Gui.cutoffSlider);
     flt2Gui.resonanceSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT2_RESONANCE_ID, flt2Gui.resonanceSlider);
-
-    // See above.
-    flt2Gui.cutoffSlider.setSkewFactorFromMidPoint(1000.0f);
     addAndMakeVisible(&flt2Gui);
 }
 

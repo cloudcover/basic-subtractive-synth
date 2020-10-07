@@ -45,8 +45,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
 
     auto flt1TypeParam = std::make_unique<juce::AudioParameterFloat>(FLT1_TYPE_ID, FLT1_TYPE_NAME, 0.0f, 2.0f, 0.0f);
     params.push_back(std::move(flt1TypeParam));
-    auto flt1CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT1_CUTOFF_ID, FLT1_CUTOFF_NAME, 20.0f, 10000.0f, 400.0f);
+
+    // THIS is how to work around that issue with skewing the dial on a value that's tied into an AudioProcessorValueTreeState.
+    juce::NormalisableRange<float> cutoffRange(20.0f, 20000.0f);
+    cutoffRange.setSkewForCentre(1000.0f);
+    auto flt1CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT1_CUTOFF_ID, FLT1_CUTOFF_NAME, cutoffRange, 1000.0f, "Hz");
     params.push_back(std::move(flt1CutoffParam));
+    
     auto flt1ResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT1_RESONANCE_ID, FLT1_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
     params.push_back(std::move(flt1ResonanceParam));
 
