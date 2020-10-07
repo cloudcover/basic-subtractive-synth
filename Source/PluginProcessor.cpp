@@ -43,6 +43,29 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
     auto env1ReleaseParam = std::make_unique<juce::AudioParameterFloat>(ENV1_RELEASE_ID, ENV1_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
     params.push_back(std::move(env1ReleaseParam));
 
+    auto flt1TypeParam = std::make_unique<juce::AudioParameterFloat>(FLT1_TYPE_ID, FLT1_TYPE_NAME, 0.0f, 2.0f, 0.0f);
+    params.push_back(std::move(flt1TypeParam));
+    auto flt1CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT1_CUTOFF_ID, FLT1_CUTOFF_NAME, 20.0f, 10000.0f, 400.0f);
+    params.push_back(std::move(flt1CutoffParam));
+    auto flt1ResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT1_RESONANCE_ID, FLT1_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
+    params.push_back(std::move(flt1ResonanceParam));
+
+    auto env2AttackParam = std::make_unique<juce::AudioParameterFloat>(ENV2_ATTACK_ID, ENV2_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
+    params.push_back(std::move(env2AttackParam));
+    auto env2DecayParam = std::make_unique<juce::AudioParameterFloat>(ENV2_DECAY_ID, ENV2_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
+    params.push_back(std::move(env2DecayParam));
+    auto env2SustainParam = std::make_unique<juce::AudioParameterFloat>(ENV2_SUSTAIN_ID, ENV2_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
+    params.push_back(std::move(env2SustainParam));
+    auto env2ReleaseParam = std::make_unique<juce::AudioParameterFloat>(ENV2_RELEASE_ID, ENV2_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
+    params.push_back(std::move(env2ReleaseParam));
+
+    auto flt2TypeParam = std::make_unique<juce::AudioParameterFloat>(FLT2_TYPE_ID, FLT2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
+    params.push_back(std::move(flt2TypeParam));
+    auto flt2CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT2_CUTOFF_ID, FLT2_CUTOFF_NAME, 20.0f, 10000.0f, 400.0f);
+    params.push_back(std::move(flt2CutoffParam));
+    auto flt2ResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT2_RESONANCE_ID, FLT2_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
+    params.push_back(std::move(flt2ResonanceParam));
+
     return { params.begin(), params.end() };
 }
 

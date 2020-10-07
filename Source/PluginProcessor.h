@@ -21,6 +21,29 @@
 #define ENV1_RELEASE_ID "env1-release"
 #define ENV1_RELEASE_NAME "Env 1 Release"
 
+#define ENV2_ATTACK_ID "env2-attack"
+#define ENV2_ATTACK_NAME "Env 2 Attack"
+#define ENV2_DECAY_ID "env2-decay"
+#define ENV2_DECAY_NAME "Env 2 Decay"
+#define ENV2_SUSTAIN_ID "env2-sustain"
+#define ENV2_SUSTAIN_NAME "Env 2 Sustain"
+#define ENV2_RELEASE_ID "env2-release"
+#define ENV2_RELEASE_NAME "Env 2 Release"
+
+#define FLT1_TYPE_ID "flt1-type"
+#define FLT1_TYPE_NAME "Flt 1 Type"
+#define FLT1_CUTOFF_ID "flt1-cutoff"
+#define FLT1_CUTOFF_NAME "Flt 1 Cutoff"
+#define FLT1_RESONANCE_ID "flt1-resonance"
+#define FLT1_RESONANCE_NAME "Flt 1 Resonance"
+
+#define FLT2_TYPE_ID "flt2-type"
+#define FLT2_TYPE_NAME "Flt 2 Type"
+#define FLT2_CUTOFF_ID "flt2-cutoff"
+#define FLT2_CUTOFF_NAME "Flt 2 Cutoff"
+#define FLT2_RESONANCE_ID "flt2-resonance"
+#define FLT2_RESONANCE_NAME "Flt 2 Resonance"
+
 //==============================================================================
 /**
 */
