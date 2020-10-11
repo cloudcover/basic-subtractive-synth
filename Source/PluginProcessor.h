@@ -94,8 +94,19 @@ public:
 
     juce::AudioProcessorValueTreeState treeState;
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    
+    void updateFilters();
 
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicsubtractivesynthAudioProcessor)
+    
+    juce::Synthesiser mySynth;
+    SynthVoice* myVoice;
+    
+    juce::dsp::ProcessorDuplicator<juce::dsp::StateVariableFilter::Filter<float>, juce::dsp::StateVariableFilter::Parameters<float>> filter1;
+    juce::dsp::ProcessorDuplicator<juce::dsp::StateVariableFilter::Filter<float>, juce::dsp::StateVariableFilter::Parameters<float>> filter2;
+    
+    // We're not using this for anything yet, we're just storing it as a best practice for handling sample rate changes in the future.
+    double lastSampleRate;
 };

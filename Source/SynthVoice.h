@@ -59,16 +59,12 @@ class SynthVoice : public juce::SynthesiserVoice
         {
             for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
             {
-                outputBuffer.addSample(channel, startSample, setEnvelope() * 0.3f);
+                outputBuffer.addSample(channel, startSample, getSummedOscillators());
             }
             
             ++startSample;
         }
     }
-    
-    /* RENDERING ORDER:
-     setOscType -> setEnvelope() -> renderNextBlock()
-     */
     
     //=================================================
     
@@ -86,14 +82,21 @@ class SynthVoice : public juce::SynthesiserVoice
     
     // ================ other functions ================
     
-    void getOscType(float* selection)
+    void setOsc1Type(float* selection)
     {
         osc1_waveformType = *selection;
     }
     
     //=================================================
     
-    double setOscType()
+    void setOsc2Type(float* selection)
+    {
+        osc2_waveformType = *selection;
+    }
+    
+    //=================================================
+    
+    double getOsc1Output()
     {
         switch (osc1_waveformType)
         {
@@ -107,7 +110,21 @@ class SynthVoice : public juce::SynthesiserVoice
     
     //=================================================
     
-    void getEnvelopeParams(float* attack, float* decay, float* sustain, float* release)
+    double getOsc2Output()
+    {
+        switch (osc2_waveformType)
+        {
+            case 0: return osc2.sinewave(frequency);
+            case 1: return osc2.saw(frequency);
+            case 2: return osc2.square(frequency);
+        }
+        
+        return osc2.sinewave(frequency);
+    }
+    
+    //=================================================
+    
+    void setEnv1Params(float* attack, float* decay, float* sustain, float* release)
     {
         env1.setAttack(double(*attack));
         env1.setDecay(double(*decay));
@@ -117,14 +134,17 @@ class SynthVoice : public juce::SynthesiserVoice
     
     //=================================================
     
-    double setEnvelope()
+    void setEnv2Params(float* attack, float* decay, float* sustain, float* release)
     {
-        return env1.adsr(setOscType(), env1.trigger);
+        env2.setAttack(double(*attack));
+        env2.setDecay(double(*decay));
+        env2.setSustain(double(*sustain));
+        env2.setRelease(double(*release));
     }
     
     //=================================================
     
-    void getFilterParams(float* filterType, float* filterCutoff, float* filterRes)
+    void setFlt1Params(float* filterType, float* filterCutoff, float* filterRes)
     {
         flt1_type = *filterType;
         flt1_cutoff = *filterCutoff;
@@ -133,20 +153,47 @@ class SynthVoice : public juce::SynthesiserVoice
     
     //=================================================
     
+    void setFlt2Params(float* filterType, float* filterCutoff, float* filterRes)
+    {
+        flt2_type = *filterType;
+        flt2_cutoff = *filterCutoff;
+        flt2_resonance = *filterRes;
+    }
+    
+    //=================================================
+    
+    double getSummedOscillators()
+    {
+        double osc1 = env1.adsr(getOsc1Output(), env1.trigger) / 2.0f;
+        double osc2 = env2.adsr(getOsc2Output(), env2.trigger) / 2.0f;
+        
+        return osc1 + osc2;
+    }
+    
+    //=================================================
+    
 private:
+    // VOICE INFO
     double level;
     double frequency;
     
+    // OSCILLATORS
     int osc1_waveformType;
     maxiOsc osc1;
-    
     int osc2_waveformType;
     maxiOsc osc2;
     
+    // ENVELOPES
+    maxiEnv env1;
+    maxiEnv env2;
+    
+    // FILTER PARAMETERS
+    // (NOTE: Filter is located outside of SynthVoice as a ProcessorDuplicator of type dsp::StateVariableFilter.)
     int flt1_type;
     float flt1_cutoff;
     float flt1_resonance;
     
-    maxiEnv env1;
-    maxiEnv env2;
+    int flt2_type;
+    float flt2_cutoff;
+    float flt2_resonance;
 };

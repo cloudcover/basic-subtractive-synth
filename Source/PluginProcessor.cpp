@@ -23,7 +23,15 @@ BasicsubtractivesynthAudioProcessor::BasicsubtractivesynthAudioProcessor()
 treeState(*this, nullptr, "PARAMETERS", createParameterLayout())
 #endif
 {
-    // initialize mySynth here
+    mySynth.clearVoices();
+    
+    for (int i = 0; i < 16; i++)
+    {
+        mySynth.addVoice(new SynthVoice());
+    }
+    
+    mySynth.clearSounds();
+    mySynth.addSound(new SynthSound());
 }
 
 BasicsubtractivesynthAudioProcessor::~BasicsubtractivesynthAudioProcessor()
@@ -147,8 +155,22 @@ void BasicsubtractivesynthAudioProcessor::changeProgramName (int index, const ju
 //==============================================================================
 void BasicsubtractivesynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    juce::ignoreUnused(samplesPerBlock);
+    lastSampleRate = sampleRate;
+    mySynth.setCurrentPlaybackSampleRate(lastSampleRate);
+    
+    juce::dsp::ProcessSpec spec;
+    spec.sampleRate = lastSampleRate;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.numChannels = getTotalNumOutputChannels();
+    
+    filter1.reset();
+    filter2.reset();
+    
+    filter1.prepare(spec);
+    filter2.prepare(spec);
+    
+    updateFilters();
 }
 
 void BasicsubtractivesynthAudioProcessor::releaseResources()
@@ -181,33 +203,95 @@ bool BasicsubtractivesynthAudioProcessor::isBusesLayoutSupported (const BusesLay
 }
 #endif
 
+void BasicsubtractivesynthAudioProcessor::updateFilters()
+{
+    int flt1_type = *treeState.getRawParameterValue(FLT1_TYPE_ID);
+    int flt1_cutoff = *treeState.getRawParameterValue(FLT1_CUTOFF_ID);
+    int flt1_resonance = *treeState.getRawParameterValue(FLT1_RESONANCE_ID);
+    
+    if (flt1_type == 0)
+    {
+        filter1.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
+        filter1.state->setCutOffFrequency(lastSampleRate, flt1_cutoff, flt1_resonance);
+    }
+    else if (flt1_type == 1)
+    {
+        filter1.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::highPass;
+        filter1.state->setCutOffFrequency(lastSampleRate, flt1_cutoff, flt1_resonance);
+    }
+    else if (flt1_type == 2)
+    {
+        filter1.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::bandPass;
+        filter1.state->setCutOffFrequency(lastSampleRate, flt1_cutoff, flt1_resonance);
+    }
+    
+    int flt2_type = *treeState.getRawParameterValue(FLT2_TYPE_ID);
+    int flt2_cutoff = *treeState.getRawParameterValue(FLT2_CUTOFF_ID);
+    int flt2_resonance = *treeState.getRawParameterValue(FLT2_RESONANCE_ID);
+    
+    if (flt2_type == 0)
+    {
+        filter2.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
+        filter2.state->setCutOffFrequency(lastSampleRate, flt2_cutoff, flt2_resonance);
+    }
+    else if (flt2_type == 1)
+    {
+        filter2.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::highPass;
+        filter2.state->setCutOffFrequency(lastSampleRate, flt2_cutoff, flt2_resonance);
+    }
+    else if (flt2_type == 2)
+    {
+        filter2.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::bandPass;
+        filter2.state->setCutOffFrequency(lastSampleRate, flt2_cutoff, flt2_resonance);
+    }
+}
+
 void BasicsubtractivesynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
-    juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
-
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    for (int i = 0; i < mySynth.getNumVoices(); i++)
     {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        if ((myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i))))
+        {
+            // workaround suggested in YouTube comments
+            float* env1_attackPtr = (float*) treeState.getRawParameterValue(ENV1_ATTACK_ID);
+            float* env1_decayPtr = (float*) treeState.getRawParameterValue(ENV1_DECAY_ID);
+            float* env1_sustainPtr = (float*) treeState.getRawParameterValue(ENV1_SUSTAIN_ID);
+            float* env1_releasePtr = (float*) treeState.getRawParameterValue(ENV1_RELEASE_ID);
+            myVoice->setEnv1Params(env1_attackPtr, env1_decayPtr, env1_sustainPtr, env1_releasePtr);
+            
+            float* env2_attackPtr = (float*) treeState.getRawParameterValue(ENV2_ATTACK_ID);
+            float* env2_decayPtr = (float*) treeState.getRawParameterValue(ENV2_DECAY_ID);
+            float* env2_sustainPtr = (float*) treeState.getRawParameterValue(ENV2_SUSTAIN_ID);
+            float* env2_releasePtr = (float*) treeState.getRawParameterValue(ENV2_RELEASE_ID);
+            myVoice->setEnv2Params(env2_attackPtr, env2_decayPtr, env2_sustainPtr, env2_releasePtr);
+            
+            float* osc1_typePtr = (float*) treeState.getRawParameterValue(OSC1_TYPE_ID);
+            myVoice->setOsc1Type(osc1_typePtr);
+            
+            float* osc2_typePtr = (float*) treeState.getRawParameterValue(OSC2_TYPE_ID);
+            myVoice->setOsc2Type(osc2_typePtr);
+            
+            float* flt1_typePtr = (float*) treeState.getRawParameterValue(FLT1_TYPE_ID);
+            float* flt1_cutoffPtr = (float*) treeState.getRawParameterValue(FLT1_CUTOFF_ID);
+            float* flt1_resonancePtr = (float*) treeState.getRawParameterValue(FLT1_RESONANCE_ID);
+            myVoice->setFlt1Params(flt1_typePtr, flt1_cutoffPtr, flt1_resonancePtr);
+            
+            float* flt2_typePtr = (float*) treeState.getRawParameterValue(FLT2_TYPE_ID);
+            float* flt2_cutoffPtr = (float*) treeState.getRawParameterValue(FLT2_CUTOFF_ID);
+            float* flt2_resonancePtr = (float*) treeState.getRawParameterValue(FLT2_RESONANCE_ID);
+            myVoice->setFlt1Params(flt2_typePtr, flt2_cutoffPtr, flt2_resonancePtr);
+        }
     }
+    
+    buffer.clear();
+    mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    updateFilters();
+    
+    juce::dsp::AudioBlock<float> block(buffer);
+    
+    // TODO: mySynth.renderNextBlock is handing over the sum of both oscillators, so we are unable
+    // to make use of the second filter. Figure out a solution for this.
+    filter1.process(juce::dsp::ProcessContextReplacing<float>(block));
 }
 
 //==============================================================================
