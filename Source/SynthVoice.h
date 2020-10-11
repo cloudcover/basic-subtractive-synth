@@ -27,7 +27,11 @@ class SynthVoice : public juce::SynthesiserVoice
     void startNote (int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
     {
         env1.trigger = 1;
+        env2.trigger = 1;
+        
+        // TODO: make actual use of the incoming velocity value.
         level = velocity;
+        
         frequency = juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber);
     }
     
@@ -36,7 +40,10 @@ class SynthVoice : public juce::SynthesiserVoice
     void stopNote (float velocity, bool allowTailOff)
     {
         env1.trigger = 0;
-        allowTailOff = true;
+        env2.trigger = 0;
+        
+        // This doesn't make sense - I don't think I need it?
+        //allowTailOff = true;
         
         if (velocity == 0)
         {
@@ -59,32 +66,36 @@ class SynthVoice : public juce::SynthesiserVoice
         }
     }
     
+    /* RENDERING ORDER:
+     setOscType -> setEnvelope() -> renderNextBlock()
+     */
+    
     //=================================================
     
     void controllerMoved (int controllerNumber, int newControllerValue)
     {
-        
+        // no implementation yet
     }
     
     //=================================================
     
     void pitchWheelMoved (int newPitchWheelValue)
     {
-        
+        // no implementation yet
     }
     
     // ================ other functions ================
     
     void getOscType(float* selection)
     {
-        theWave = *selection;
+        osc1_waveformType = *selection;
     }
     
     //=================================================
     
     double setOscType()
     {
-        switch (theWave)
+        switch (osc1_waveformType)
         {
             case 0: return osc1.sinewave(frequency);
             case 1: return osc1.saw(frequency);
@@ -115,9 +126,9 @@ class SynthVoice : public juce::SynthesiserVoice
     
     void getFilterParams(float* filterType, float* filterCutoff, float* filterRes)
     {
-        filterChoice = *filterType;
-        cutoff = *filterCutoff;
-        resonance = *filterRes;
+        flt1_type = *filterType;
+        flt1_cutoff = *filterCutoff;
+        flt1_resonance = *filterRes;
     }
     
     //=================================================
@@ -125,12 +136,17 @@ class SynthVoice : public juce::SynthesiserVoice
 private:
     double level;
     double frequency;
-    int theWave;
     
-    int filterChoice;
-    float cutoff;
-    float resonance;
-    
+    int osc1_waveformType;
     maxiOsc osc1;
+    
+    int osc2_waveformType;
+    maxiOsc osc2;
+    
+    int flt1_type;
+    float flt1_cutoff;
+    float flt1_resonance;
+    
     maxiEnv env1;
+    maxiEnv env2;
 };
