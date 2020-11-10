@@ -218,7 +218,7 @@ void BasicSubtractiveSynthAudioProcessor::processBlock (juce::AudioBuffer<float>
 }
 
 bool BasicSubtractiveSynthAudioProcessor::hasEditor() const { return true; }
-juce::AudioProcessorEditor* BasicSubtractiveSynthAudioProcessor::createEditor() { return new BasicsubtractivesynthAudioProcessorEditor (*this); }
+juce::AudioProcessorEditor* BasicSubtractiveSynthAudioProcessor::createEditor() { return new BasicSubtractiveSynthAudioProcessorEditor (*this); }
 void BasicSubtractiveSynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData) { }
 void BasicSubtractiveSynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes) { }
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new BasicSubtractiveSynthAudioProcessor(); }
