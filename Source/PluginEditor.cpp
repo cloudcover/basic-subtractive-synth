@@ -1,7 +1,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-BasicsubtractivesynthAudioProcessorEditor::BasicsubtractivesynthAudioProcessorEditor (BasicsubtractivesynthAudioProcessor& p)
+BasicSubtractiveSynthAudioProcessorEditor::BasicSubtractiveSynthAudioProcessorEditor (BasicSubtractiveSynthAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), osc1Gui(p), osc2Gui(p), osc3Gui(p), fltGui(p), fltEnvGui(p), ampEnvGui(p)
 {
     setSize (600, 400);
@@ -34,16 +34,14 @@ BasicsubtractivesynthAudioProcessorEditor::BasicsubtractivesynthAudioProcessorEd
     addAndMakeVisible(&ampEnvGui);
 }
 
-BasicsubtractivesynthAudioProcessorEditor::~BasicsubtractivesynthAudioProcessorEditor()
-{
-}
+BasicSubtractiveSynthAudioProcessorEditor::~BasicSubtractiveSynthAudioProcessorEditor() { }
 
-void BasicsubtractivesynthAudioProcessorEditor::paint (juce::Graphics& g)
+void BasicSubtractiveSynthAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 }
 
-void BasicsubtractivesynthAudioProcessorEditor::resized()
+void BasicSubtractiveSynthAudioProcessorEditor::resized()
 {
     juce::Rectangle<int> area = getLocalBounds();
 

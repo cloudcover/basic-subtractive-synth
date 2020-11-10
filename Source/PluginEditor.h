@@ -6,17 +6,17 @@
 #include "FilterView.h"
 #include "OscillatorView.h"
 
-class BasicsubtractivesynthAudioProcessorEditor : public juce::AudioProcessorEditor
+class BasicSubtractiveSynthAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
-    BasicsubtractivesynthAudioProcessorEditor (BasicsubtractivesynthAudioProcessor&);
-    ~BasicsubtractivesynthAudioProcessorEditor() override;
+    BasicSubtractiveSynthAudioProcessorEditor (BasicSubtractiveSynthAudioProcessor&);
+    ~BasicSubtractiveSynthAudioProcessorEditor() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    BasicsubtractivesynthAudioProcessor& audioProcessor;
+    BasicSubtractiveSynthAudioProcessor& audioProcessor;
     
     OscillatorView osc1Gui;
     OscillatorView osc2Gui;
@@ -27,5 +27,5 @@ private:
 
     FilterView fltGui;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicsubtractivesynthAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSubtractiveSynthAudioProcessorEditor)
 };

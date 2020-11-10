@@ -1,7 +1,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-BasicsubtractivesynthAudioProcessor::BasicsubtractivesynthAudioProcessor()
+BasicSubtractiveSynthAudioProcessor::BasicSubtractiveSynthAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -25,11 +25,9 @@ treeState(*this, nullptr, "PARAMETERS", createParameterLayout())
     mySynth.addSound(new SynthSound());
 }
 
-BasicsubtractivesynthAudioProcessor::~BasicsubtractivesynthAudioProcessor()
-{
-}
+BasicSubtractiveSynthAudioProcessor::~BasicSubtractiveSynthAudioProcessor() { }
 
-juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioProcessor::createParameterLayout()
+juce::AudioProcessorValueTreeState::ParameterLayout BasicSubtractiveSynthAudioProcessor::createParameterLayout()
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
@@ -77,12 +75,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
     return { params.begin(), params.end() };
 }
 
-const juce::String BasicsubtractivesynthAudioProcessor::getName() const
-{
-    return JucePlugin_Name;
-}
+const juce::String BasicSubtractiveSynthAudioProcessor::getName() const { return JucePlugin_Name; }
 
-bool BasicsubtractivesynthAudioProcessor::acceptsMidi() const
+bool BasicSubtractiveSynthAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -91,7 +86,7 @@ bool BasicsubtractivesynthAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool BasicsubtractivesynthAudioProcessor::producesMidi() const
+bool BasicSubtractiveSynthAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -100,7 +95,7 @@ bool BasicsubtractivesynthAudioProcessor::producesMidi() const
    #endif
 }
 
-bool BasicsubtractivesynthAudioProcessor::isMidiEffect() const
+bool BasicSubtractiveSynthAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -109,35 +104,14 @@ bool BasicsubtractivesynthAudioProcessor::isMidiEffect() const
    #endif
 }
 
-double BasicsubtractivesynthAudioProcessor::getTailLengthSeconds() const
-{
-    return 0.0;
-}
+double BasicSubtractiveSynthAudioProcessor::getTailLengthSeconds() const { return 0.0; }
+int BasicSubtractiveSynthAudioProcessor::getNumPrograms() { return 1; }
+int BasicSubtractiveSynthAudioProcessor::getCurrentProgram() { return 0; }
+void BasicSubtractiveSynthAudioProcessor::setCurrentProgram (int index) { }
+const juce::String BasicSubtractiveSynthAudioProcessor::getProgramName (int index) { return {}; }
+void BasicSubtractiveSynthAudioProcessor::changeProgramName (int index, const juce::String& newName) { }
 
-int BasicsubtractivesynthAudioProcessor::getNumPrograms()
-{
-    return 1;
-}
-
-int BasicsubtractivesynthAudioProcessor::getCurrentProgram()
-{
-    return 0;
-}
-
-void BasicsubtractivesynthAudioProcessor::setCurrentProgram (int index)
-{
-}
-
-const juce::String BasicsubtractivesynthAudioProcessor::getProgramName (int index)
-{
-    return {};
-}
-
-void BasicsubtractivesynthAudioProcessor::changeProgramName (int index, const juce::String& newName)
-{
-}
-
-void BasicsubtractivesynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void BasicSubtractiveSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     juce::ignoreUnused(samplesPerBlock);
     lastSampleRate = sampleRate;
@@ -153,13 +127,10 @@ void BasicsubtractivesynthAudioProcessor::prepareToPlay (double sampleRate, int 
     updateFilter();
 }
 
-void BasicsubtractivesynthAudioProcessor::releaseResources()
-{
-    
-}
+void BasicSubtractiveSynthAudioProcessor::releaseResources() { }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool BasicsubtractivesynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool BasicSubtractiveSynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -179,7 +150,7 @@ bool BasicsubtractivesynthAudioProcessor::isBusesLayoutSupported (const BusesLay
 }
 #endif
 
-void BasicsubtractivesynthAudioProcessor::updateFilter()
+void BasicSubtractiveSynthAudioProcessor::updateFilter()
 {
     int flt_type = *treeState.getRawParameterValue(FLT_TYPE_ID);
     int flt_cutoff = *treeState.getRawParameterValue(FLT_CUTOFF_ID);
@@ -202,7 +173,7 @@ void BasicsubtractivesynthAudioProcessor::updateFilter()
     }
 }
 
-void BasicsubtractivesynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void BasicSubtractiveSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     for (int i = 0; i < mySynth.getNumVoices(); i++)
     {
@@ -246,27 +217,8 @@ void BasicsubtractivesynthAudioProcessor::processBlock (juce::AudioBuffer<float>
     filter.process(juce::dsp::ProcessContextReplacing<float>(block));
 }
 
-bool BasicsubtractivesynthAudioProcessor::hasEditor() const
-{
-    return true;
-}
-
-juce::AudioProcessorEditor* BasicsubtractivesynthAudioProcessor::createEditor()
-{
-    return new BasicsubtractivesynthAudioProcessorEditor (*this);
-}
-
-void BasicsubtractivesynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
-{
-    
-}
-
-void BasicsubtractivesynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
-{
-    
-}
-
-juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
-{
-    return new BasicsubtractivesynthAudioProcessor();
-}
+bool BasicSubtractiveSynthAudioProcessor::hasEditor() const { return true; }
+juce::AudioProcessorEditor* BasicSubtractiveSynthAudioProcessor::createEditor() { return new BasicsubtractivesynthAudioProcessorEditor (*this); }
+void BasicSubtractiveSynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData) { }
+void BasicSubtractiveSynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes) { }
+juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new BasicSubtractiveSynthAudioProcessor(); }

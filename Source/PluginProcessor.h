@@ -42,11 +42,11 @@
 #define AMP_ENV_RELEASE_ID "amp-env-release"
 #define AMP_ENV_RELEASE_NAME "Amp Env Release"
 
-class BasicsubtractivesynthAudioProcessor  : public juce::AudioProcessor
+class BasicSubtractiveSynthAudioProcessor  : public juce::AudioProcessor
 {
 public:
-    BasicsubtractivesynthAudioProcessor();
-    ~BasicsubtractivesynthAudioProcessor() override;
+    BasicSubtractiveSynthAudioProcessor();
+    ~BasicSubtractiveSynthAudioProcessor() override;
 
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
@@ -82,7 +82,7 @@ public:
     void updateFilter();
 
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicsubtractivesynthAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSubtractiveSynthAudioProcessor)
     
     juce::Synthesiser mySynth;
     
