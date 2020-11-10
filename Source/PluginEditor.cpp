@@ -1,15 +1,6 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-//==============================================================================
 BasicsubtractivesynthAudioProcessorEditor::BasicsubtractivesynthAudioProcessorEditor (BasicsubtractivesynthAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), osc1Gui(p), osc2Gui(p), osc3Gui(p), fltGui(p), fltEnvGui(p), ampEnvGui(p)
 {
@@ -47,7 +38,6 @@ BasicsubtractivesynthAudioProcessorEditor::~BasicsubtractivesynthAudioProcessorE
 {
 }
 
-//==============================================================================
 void BasicsubtractivesynthAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));

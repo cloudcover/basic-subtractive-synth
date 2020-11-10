@@ -1,18 +1,7 @@
-/*
-  ==============================================================================
-
-    Filter.cpp
-    Created: 5 Oct 2020 11:41:39am
-    Author:  nick.suda@gmail.com
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
-#include "Filter.h"
+#include "FilterView.h"
 
-//==============================================================================
-Filter::Filter(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
+FilterView::FilterView(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
 {
     setSize(200, 200);
     typeMenu.addItem("Low Pass", 1);
@@ -36,11 +25,11 @@ Filter::Filter(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
     addAndMakeVisible(&resonanceSlider);
 }
 
-Filter::~Filter()
+FilterView::~FilterView()
 {
 }
 
-void Filter::paint (juce::Graphics& g)
+void FilterView::paint (juce::Graphics& g)
 {
     //background ui stuff
     juce::Rectangle<int> titleArea(0, 10, getWidth(), 20);
@@ -55,7 +44,7 @@ void Filter::paint (juce::Graphics& g)
     g.drawRoundedRectangle(area, 20.0f, 2.0f);
 }
 
-void Filter::resized()
+void FilterView::resized()
 {
     juce::Rectangle<int> area = getLocalBounds().reduced(40);
 

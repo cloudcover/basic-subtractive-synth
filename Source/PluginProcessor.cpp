@@ -1,15 +1,6 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-//==============================================================================
 BasicsubtractivesynthAudioProcessor::BasicsubtractivesynthAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
@@ -86,7 +77,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
     return { params.begin(), params.end() };
 }
 
-//==============================================================================
 const juce::String BasicsubtractivesynthAudioProcessor::getName() const
 {
     return JucePlugin_Name;
@@ -126,8 +116,7 @@ double BasicsubtractivesynthAudioProcessor::getTailLengthSeconds() const
 
 int BasicsubtractivesynthAudioProcessor::getNumPrograms()
 {
-    return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
-                // so this should be at least 1, even if you're not really implementing programs.
+    return 1;
 }
 
 int BasicsubtractivesynthAudioProcessor::getCurrentProgram()
@@ -148,7 +137,6 @@ void BasicsubtractivesynthAudioProcessor::changeProgramName (int index, const ju
 {
 }
 
-//==============================================================================
 void BasicsubtractivesynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     juce::ignoreUnused(samplesPerBlock);
@@ -167,8 +155,7 @@ void BasicsubtractivesynthAudioProcessor::prepareToPlay (double sampleRate, int 
 
 void BasicsubtractivesynthAudioProcessor::releaseResources()
 {
-    // When playback stops, you can use this as an opportunity to free up any
-    // spare memory, etc.
+    
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -178,13 +165,10 @@ bool BasicsubtractivesynthAudioProcessor::isBusesLayoutSupported (const BusesLay
     juce::ignoreUnused (layouts);
     return true;
   #else
-    // This is the place where you check if the layout is supported.
-    // In this template code we only support mono or stereo.
     if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
      && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
 
-    // This checks if the input layout matches the output layout
    #if ! JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
@@ -259,15 +243,12 @@ void BasicsubtractivesynthAudioProcessor::processBlock (juce::AudioBuffer<float>
     
     juce::dsp::AudioBlock<float> block(buffer);
     
-    // TODO: mySynth.renderNextBlock is handing over the sum of both oscillators, so we are unable
-    // to make use of the second filter. Figure out a solution for this.
     filter.process(juce::dsp::ProcessContextReplacing<float>(block));
 }
 
-//==============================================================================
 bool BasicsubtractivesynthAudioProcessor::hasEditor() const
 {
-    return true; // (change this to false if you choose to not supply an editor)
+    return true;
 }
 
 juce::AudioProcessorEditor* BasicsubtractivesynthAudioProcessor::createEditor()
@@ -275,22 +256,16 @@ juce::AudioProcessorEditor* BasicsubtractivesynthAudioProcessor::createEditor()
     return new BasicsubtractivesynthAudioProcessorEditor (*this);
 }
 
-//==============================================================================
 void BasicsubtractivesynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    
 }
 
 void BasicsubtractivesynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    
 }
 
-//==============================================================================
-// This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new BasicsubtractivesynthAudioProcessor();

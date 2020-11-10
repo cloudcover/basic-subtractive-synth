@@ -1,18 +1,7 @@
-/*
-  ==============================================================================
-
-    Envelope.cpp
-    Created: 5 Oct 2020 11:41:07am
-    Author:  nick.suda@gmail.com
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
-#include "Envelope.h"
+#include "EnvelopeView.h"
 
-//==============================================================================
-Envelope::Envelope(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
+EnvelopeView::EnvelopeView(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
 {
     setSize(200, 200);
 
@@ -47,11 +36,11 @@ Envelope::Envelope(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
     // don't create bindings to ValueTreeState yet, since these are instanced for two voices
 }
 
-Envelope::~Envelope()
+EnvelopeView::~EnvelopeView()
 {
 }
 
-void Envelope::paint (juce::Graphics& g)
+void EnvelopeView::paint (juce::Graphics& g)
 {
     //fancy stuff for the UI background etc
     juce::Rectangle<int> titleArea(0, 10, getWidth(), 20);
@@ -72,7 +61,7 @@ void Envelope::paint (juce::Graphics& g)
     g.drawRoundedRectangle(area, 20.0f, 2.0f);
 }
 
-void Envelope::resized()
+void EnvelopeView::resized()
 {
     //draws the sliders...we use a rectangle object to dynamically size the UI (if we want to resize for IPad etc without needing to change ALL settings)
     juce::Rectangle<int> area = getLocalBounds().reduced(50);

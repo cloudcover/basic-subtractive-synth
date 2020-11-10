@@ -1,33 +1,20 @@
-/*
-  ==============================================================================
-
-    Envelope.h
-    Created: 5 Oct 2020 11:41:07am
-    Author:  nick.suda@gmail.com
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
-//==============================================================================
-/*
-*/
-class Envelope  : public juce::Component
+class EnvelopeView : public juce::Component
 {
 public:
-    Envelope(BasicsubtractivesynthAudioProcessor&);
-    ~Envelope() override;
+    EnvelopeView(BasicsubtractivesynthAudioProcessor&);
+    ~EnvelopeView() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
     BasicsubtractivesynthAudioProcessor& audioProcessor;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Envelope)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EnvelopeView)
 
 public:
     juce::Slider attackSlider;

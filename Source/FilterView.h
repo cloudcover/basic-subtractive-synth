@@ -1,33 +1,20 @@
-/*
-  ==============================================================================
-
-    Filter.h
-    Created: 5 Oct 2020 11:41:39am
-    Author:  nick.suda@gmail.com
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
-//==============================================================================
-/*
-*/
-class Filter  : public juce::Component
+class FilterView : public juce::Component
 {
 public:
-    Filter(BasicsubtractivesynthAudioProcessor&);
-    ~Filter() override;
+    FilterView(BasicsubtractivesynthAudioProcessor&);
+    ~FilterView() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
     BasicsubtractivesynthAudioProcessor& audioProcessor;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Filter)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterView)
 
 public:
     juce::ComboBox typeMenu;

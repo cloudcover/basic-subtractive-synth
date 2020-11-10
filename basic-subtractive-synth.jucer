@@ -12,12 +12,15 @@
         <FILE id="PLywFA" name="maximilian.cpp" compile="1" resource="0" file="../../Libraries/Maximilian/src/maximilian.cpp"/>
         <FILE id="v2EAUH" name="maximilian.h" compile="0" resource="0" file="../../Libraries/Maximilian/src/maximilian.h"/>
       </GROUP>
-      <FILE id="Sg03Jc" name="Envelope.cpp" compile="1" resource="0" file="Source/Envelope.cpp"/>
-      <FILE id="TTyvZq" name="Envelope.h" compile="0" resource="0" file="Source/Envelope.h"/>
-      <FILE id="lkRsZs" name="Filter.cpp" compile="1" resource="0" file="Source/Filter.cpp"/>
-      <FILE id="COkBkz" name="Filter.h" compile="0" resource="0" file="Source/Filter.h"/>
-      <FILE id="IW3ANX" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>
-      <FILE id="Z1cSxF" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
+      <FILE id="Sg03Jc" name="EnvelopeView.cpp" compile="1" resource="0"
+            file="Source/EnvelopeView.cpp"/>
+      <FILE id="TTyvZq" name="EnvelopeView.h" compile="0" resource="0" file="Source/EnvelopeView.h"/>
+      <FILE id="lkRsZs" name="FilterView.cpp" compile="1" resource="0" file="Source/FilterView.cpp"/>
+      <FILE id="COkBkz" name="FilterView.h" compile="0" resource="0" file="Source/FilterView.h"/>
+      <FILE id="IW3ANX" name="OscillatorView.cpp" compile="1" resource="0"
+            file="Source/OscillatorView.cpp"/>
+      <FILE id="Z1cSxF" name="OscillatorView.h" compile="0" resource="0"
+            file="Source/OscillatorView.h"/>
       <FILE id="V6SD2h" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="uhwWjY" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="VNXhdE" name="PluginProcessor.cpp" compile="1" resource="0"

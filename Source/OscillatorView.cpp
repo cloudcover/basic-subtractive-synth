@@ -1,18 +1,7 @@
-/*
-  ==============================================================================
-
-    Oscillator.cpp
-    Created: 5 Oct 2020 11:41:57am
-    Author:  nick.suda@gmail.com
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
-#include "Oscillator.h"
+#include "OscillatorView.h"
 
-//==============================================================================
-Oscillator::Oscillator(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
+OscillatorView::OscillatorView(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
 {
     setSize(200, 200);
 
@@ -23,11 +12,11 @@ Oscillator::Oscillator(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(
     addAndMakeVisible(&typeMenu);
 }
 
-Oscillator::~Oscillator()
+OscillatorView::~OscillatorView()
 {
 }
 
-void Oscillator::paint (juce::Graphics& g)
+void OscillatorView::paint (juce::Graphics& g)
 {
     //background stuff
     juce::Rectangle<int> titleArea(0, 10, getWidth(), 20);
@@ -42,7 +31,7 @@ void Oscillator::paint (juce::Graphics& g)
     g.drawRoundedRectangle(area, 20.0f, 2.0f);
 }
 
-void Oscillator::resized()
+void OscillatorView::resized()
 {
     juce::Rectangle<int> area = getLocalBounds().reduced(40);
     typeMenu.setBounds(area.removeFromTop(20));
