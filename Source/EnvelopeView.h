@@ -27,4 +27,6 @@ public:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> decaySliderValue;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sustainSliderValue;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> releaseSliderValue;
+    
+    string overrideLabel = "Envelope";
 };

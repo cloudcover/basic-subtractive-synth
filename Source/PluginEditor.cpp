@@ -25,12 +25,14 @@ BasicSubtractiveSynthAudioProcessorEditor::BasicSubtractiveSynthAudioProcessorEd
     fltEnvGui.decaySliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_ENV_DECAY_ID, fltEnvGui.decaySlider);
     fltEnvGui.sustainSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_ENV_SUSTAIN_ID, fltEnvGui.sustainSlider);
     fltEnvGui.releaseSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_ENV_RELEASE_ID, fltEnvGui.releaseSlider);
+    fltEnvGui.overrideLabel = "Filter Envelope";
     addAndMakeVisible(&fltEnvGui);
 
     ampEnvGui.attackSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_ATTACK_ID, ampEnvGui.attackSlider);
     ampEnvGui.decaySliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_DECAY_ID, ampEnvGui.decaySlider);
     ampEnvGui.sustainSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_SUSTAIN_ID, ampEnvGui.sustainSlider);
     ampEnvGui.releaseSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_RELEASE_ID, ampEnvGui.releaseSlider);
+    ampEnvGui.overrideLabel = "Amplitude Envelope";
     addAndMakeVisible(&ampEnvGui);
 }
 

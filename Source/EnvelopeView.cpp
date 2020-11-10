@@ -47,7 +47,7 @@ void EnvelopeView::paint (juce::Graphics& g)
 
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
-    g.drawText("Envelope", titleArea, juce::Justification::centredTop);
+    g.drawText(overrideLabel, titleArea, juce::Justification::centredTop);
 
     //static positions for now due to time, make dynamic later
     g.drawText("A", 53, 150, 20, 20, juce::Justification::centredTop);
