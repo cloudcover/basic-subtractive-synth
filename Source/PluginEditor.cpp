@@ -11,38 +11,36 @@
 
 //==============================================================================
 BasicsubtractivesynthAudioProcessorEditor::BasicsubtractivesynthAudioProcessorEditor (BasicsubtractivesynthAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), osc1Gui(p), osc2Gui(p), env1Gui(p), env2Gui(p), flt1Gui(p), flt2Gui(p)
+    : AudioProcessorEditor (&p), audioProcessor (p), osc1Gui(p), osc2Gui(p), osc3Gui(p), fltGui(p), fltEnvGui(p), ampEnvGui(p)
 {
     setSize (600, 400);
 
+    // TODO: create a MixerView and bind it here
+    
     // add the component instance bindings here instead of in the Component's constructor
     osc1Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC1_TYPE_ID, osc1Gui.typeMenu);
     addAndMakeVisible(&osc1Gui);
-    
     osc2Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC2_TYPE_ID, osc2Gui.typeMenu);
     addAndMakeVisible(&osc2Gui);
+    osc3Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC3_TYPE_ID, osc3Gui.typeMenu);
+    addAndMakeVisible(&osc3Gui);
+    
+    fltGui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, FLT_TYPE_ID, fltGui.typeMenu);
+    fltGui.cutoffSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_CUTOFF_ID, fltGui.cutoffSlider);
+    fltGui.resonanceSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_RESONANCE_ID, fltGui.resonanceSlider);
+    addAndMakeVisible(&fltGui);
 
-    env1Gui.attackSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_ATTACK_ID, env1Gui.attackSlider);
-    env1Gui.decaySliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_DECAY_ID, env1Gui.decaySlider);
-    env1Gui.sustainSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_SUSTAIN_ID, env1Gui.sustainSlider);
-    env1Gui.releaseSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV1_RELEASE_ID, env1Gui.releaseSlider);
-    addAndMakeVisible(&env1Gui);
+    fltEnvGui.attackSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_ENV_ATTACK_ID, fltEnvGui.attackSlider);
+    fltEnvGui.decaySliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_ENV_DECAY_ID, fltEnvGui.decaySlider);
+    fltEnvGui.sustainSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_ENV_SUSTAIN_ID, fltEnvGui.sustainSlider);
+    fltEnvGui.releaseSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT_ENV_RELEASE_ID, fltEnvGui.releaseSlider);
+    addAndMakeVisible(&fltEnvGui);
 
-    env2Gui.attackSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV2_ATTACK_ID, env2Gui.attackSlider);
-    env2Gui.decaySliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV2_DECAY_ID, env2Gui.decaySlider);
-    env2Gui.sustainSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV2_SUSTAIN_ID, env2Gui.sustainSlider);
-    env2Gui.releaseSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, ENV2_RELEASE_ID, env2Gui.releaseSlider);
-    addAndMakeVisible(&env2Gui);
-
-    flt1Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, FLT1_TYPE_ID, flt1Gui.typeMenu);
-    flt1Gui.cutoffSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT1_CUTOFF_ID, flt1Gui.cutoffSlider);
-    flt1Gui.resonanceSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT1_RESONANCE_ID, flt1Gui.resonanceSlider);
-    addAndMakeVisible(&flt1Gui);
-
-    flt2Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, FLT2_TYPE_ID, flt2Gui.typeMenu);
-    flt2Gui.cutoffSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT2_CUTOFF_ID, flt2Gui.cutoffSlider);
-    flt2Gui.resonanceSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, FLT2_RESONANCE_ID, flt2Gui.resonanceSlider);
-    addAndMakeVisible(&flt2Gui);
+    ampEnvGui.attackSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_ATTACK_ID, ampEnvGui.attackSlider);
+    ampEnvGui.decaySliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_DECAY_ID, ampEnvGui.decaySlider);
+    ampEnvGui.sustainSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_SUSTAIN_ID, ampEnvGui.sustainSlider);
+    ampEnvGui.releaseSliderValue = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, AMP_ENV_RELEASE_ID, ampEnvGui.releaseSlider);
+    addAndMakeVisible(&ampEnvGui);
 }
 
 BasicsubtractivesynthAudioProcessorEditor::~BasicsubtractivesynthAudioProcessorEditor()
@@ -62,11 +60,12 @@ void BasicsubtractivesynthAudioProcessorEditor::resized()
     const int componentWidth = 200;
     const int componentHeight = 200;
 
+    // TODO: 1) add osc3Gui, 2) re-arrange everything in classic Moog layout.
+    
     osc1Gui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
-    env1Gui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
-    flt1Gui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    fltEnvGui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    fltGui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     
     osc2Gui.setBounds(0.0f, componentHeight, componentWidth, componentHeight);
-    env2Gui.setBounds(componentWidth, componentHeight, componentWidth, componentHeight);
-    flt2Gui.setBounds(componentWidth * 2.0f, componentHeight, componentWidth, componentHeight);
+    ampEnvGui.setBounds(componentWidth, componentHeight, componentWidth, componentHeight);
 }

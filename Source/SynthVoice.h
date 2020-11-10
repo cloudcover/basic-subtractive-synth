@@ -96,6 +96,13 @@ class SynthVoice : public juce::SynthesiserVoice
     
     //=================================================
     
+    void setOsc3Type(float* selection)
+    {
+        osc3_waveformType = *selection;
+    }
+    
+    //=================================================
+    
     double getOsc1Output()
     {
         switch (osc1_waveformType)
@@ -124,7 +131,7 @@ class SynthVoice : public juce::SynthesiserVoice
     
     //=================================================
     
-    void setEnv1Params(float* attack, float* decay, float* sustain, float* release)
+    void setFltEnvParams(float* attack, float* decay, float* sustain, float* release)
     {
         env1.setAttack(double(*attack));
         env1.setDecay(double(*decay));
@@ -134,7 +141,7 @@ class SynthVoice : public juce::SynthesiserVoice
     
     //=================================================
     
-    void setEnv2Params(float* attack, float* decay, float* sustain, float* release)
+    void setAmpEnvParams(float* attack, float* decay, float* sustain, float* release)
     {
         env2.setAttack(double(*attack));
         env2.setDecay(double(*decay));
@@ -144,7 +151,7 @@ class SynthVoice : public juce::SynthesiserVoice
     
     //=================================================
     
-    void setFlt1Params(float* filterType, float* filterCutoff, float* filterRes)
+    void setFltParams(float* filterType, float* filterCutoff, float* filterRes)
     {
         flt1_type = *filterType;
         flt1_cutoff = *filterCutoff;

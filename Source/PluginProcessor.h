@@ -14,40 +14,41 @@
 
 #define OSC1_TYPE_ID "osc1-type"
 #define OSC1_TYPE_NAME "Osc 1 Type"
+#define OSC1_LEVEL_ID "osc1-level"
+#define OSC1_LEVEL_NAME "Osc 1 Level"
 #define OSC2_TYPE_ID "osc2-type"
 #define OSC2_TYPE_NAME "Osc 2 Type"
+#define OSC2_LEVEL_ID "osc2-level"
+#define OSC2_LEVEL_NAME "Osc 2 Level"
+#define OSC3_TYPE_ID "osc3-type"
+#define OSC3_TYPE_NAME "Osc 3 Type"
+#define OSC3_LEVEL_ID "osc3-level"
+#define OSC3_LEVEL_NAME "Osc 3 Level"
 
-#define ENV1_ATTACK_ID "env1-attack"
-#define ENV1_ATTACK_NAME "Env 1 Attack"
-#define ENV1_DECAY_ID "env1-decay"
-#define ENV1_DECAY_NAME "Env 1 Decay"
-#define ENV1_SUSTAIN_ID "env1-sustain"
-#define ENV1_SUSTAIN_NAME "Env 1 Sustain"
-#define ENV1_RELEASE_ID "env1-release"
-#define ENV1_RELEASE_NAME "Env 1 Release"
+#define FLT_TYPE_ID "flt-type"
+#define FLT_TYPE_NAME "Flt Type"
+#define FLT_CUTOFF_ID "flt-cutoff"
+#define FLT_CUTOFF_NAME "Flt Cutoff"
+#define FLT_RESONANCE_ID "flt-resonance"
+#define FLT_RESONANCE_NAME "Flt Resonance"
 
-#define ENV2_ATTACK_ID "env2-attack"
-#define ENV2_ATTACK_NAME "Env 2 Attack"
-#define ENV2_DECAY_ID "env2-decay"
-#define ENV2_DECAY_NAME "Env 2 Decay"
-#define ENV2_SUSTAIN_ID "env2-sustain"
-#define ENV2_SUSTAIN_NAME "Env 2 Sustain"
-#define ENV2_RELEASE_ID "env2-release"
-#define ENV2_RELEASE_NAME "Env 2 Release"
+#define FLT_ENV_ATTACK_ID "flt-env-attack"
+#define FLT_ENV_ATTACK_NAME "Filter Env Attack"
+#define FLT_ENV_DECAY_ID "flt-env-decay"
+#define FLT_ENV_DECAY_NAME "Filter Env Decay"
+#define FLT_ENV_SUSTAIN_ID "flt-env-sustain"
+#define FLT_ENV_SUSTAIN_NAME "Filter Env Sustain"
+#define FLT_ENV_RELEASE_ID "flt-env-release"
+#define FLT_ENV_RELEASE_NAME "Filter Env Release"
 
-#define FLT1_TYPE_ID "flt1-type"
-#define FLT1_TYPE_NAME "Flt 1 Type"
-#define FLT1_CUTOFF_ID "flt1-cutoff"
-#define FLT1_CUTOFF_NAME "Flt 1 Cutoff"
-#define FLT1_RESONANCE_ID "flt1-resonance"
-#define FLT1_RESONANCE_NAME "Flt 1 Resonance"
-
-#define FLT2_TYPE_ID "flt2-type"
-#define FLT2_TYPE_NAME "Flt 2 Type"
-#define FLT2_CUTOFF_ID "flt2-cutoff"
-#define FLT2_CUTOFF_NAME "Flt 2 Cutoff"
-#define FLT2_RESONANCE_ID "flt2-resonance"
-#define FLT2_RESONANCE_NAME "Flt 2 Resonance"
+#define AMP_ENV_ATTACK_ID "amp-env-attack"
+#define AMP_ENV_ATTACK_NAME "Amp Env Attack"
+#define AMP_ENV_DECAY_ID "amp-env-decay"
+#define AMP_ENV_DECAY_NAME "Amp Env Decay"
+#define AMP_ENV_SUSTAIN_ID "amp-env-sustain"
+#define AMP_ENV_SUSTAIN_NAME "Amp Env Sustain"
+#define AMP_ENV_RELEASE_ID "amp-env-release"
+#define AMP_ENV_RELEASE_NAME "Amp Env Release"
 
 //==============================================================================
 /**
@@ -95,18 +96,19 @@ public:
     juce::AudioProcessorValueTreeState treeState;
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     
-    void updateFilters();
+    void updateFilter();
 
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicsubtractivesynthAudioProcessor)
     
     juce::Synthesiser mySynth;
+    
+    // This is a pointer because it's essentially a template, as I understand it.
     SynthVoice* myVoice;
     
-    juce::dsp::ProcessorDuplicator<juce::dsp::StateVariableFilter::Filter<float>, juce::dsp::StateVariableFilter::Parameters<float>> filter1;
-    juce::dsp::ProcessorDuplicator<juce::dsp::StateVariableFilter::Filter<float>, juce::dsp::StateVariableFilter::Parameters<float>> filter2;
+    // TODO: Can this be relocated somewhere where it makes more sense, like inside of SynthVoice?
+    juce::dsp::ProcessorDuplicator<juce::dsp::StateVariableFilter::Filter<float>, juce::dsp::StateVariableFilter::Parameters<float>> filter;
     
-    // We're not using this for anything yet, we're just storing it as a best practice for handling sample rate changes in the future.
     double lastSampleRate;
 };

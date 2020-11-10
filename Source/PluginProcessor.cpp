@@ -44,48 +44,44 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicsubtractivesynthAudioPr
 
     auto osc1TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC1_TYPE_ID, OSC1_TYPE_NAME, 0.0f, 2.0f, 0.0f);
     params.push_back(std::move(osc1TypeParam));
-
-    auto env1AttackParam = std::make_unique<juce::AudioParameterFloat>(ENV1_ATTACK_ID, ENV1_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
-    params.push_back(std::move(env1AttackParam));
-    auto env1DecayParam = std::make_unique<juce::AudioParameterFloat>(ENV1_DECAY_ID, ENV1_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
-    params.push_back(std::move(env1DecayParam));
-    auto env1SustainParam = std::make_unique<juce::AudioParameterFloat>(ENV1_SUSTAIN_ID, ENV1_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
-    params.push_back(std::move(env1SustainParam));
-    auto env1ReleaseParam = std::make_unique<juce::AudioParameterFloat>(ENV1_RELEASE_ID, ENV1_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
-    params.push_back(std::move(env1ReleaseParam));
-
-    auto flt1TypeParam = std::make_unique<juce::AudioParameterFloat>(FLT1_TYPE_ID, FLT1_TYPE_NAME, 0.0f, 2.0f, 0.0f);
-    params.push_back(std::move(flt1TypeParam));
-
+    auto osc1LevelParam = std::make_unique<juce::AudioParameterFloat>(OSC1_LEVEL_ID, OSC1_LEVEL_NAME, 0.0f, 1.0f, 0.5f);
+    params.push_back(std::move(osc1LevelParam));
+    auto osc2TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC2_TYPE_ID, OSC2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
+    params.push_back(std::move(osc2TypeParam));
+    auto osc2LevelParam = std::make_unique<juce::AudioParameterFloat>(OSC2_LEVEL_ID, OSC2_LEVEL_NAME, 0.0f, 1.0f, 0.5f);
+    params.push_back(std::move(osc2LevelParam));
+    auto osc3TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC3_TYPE_ID, OSC3_TYPE_NAME, 0.0f, 2.0f, 0.0f);
+    params.push_back(std::move(osc3TypeParam));
+    auto osc3LevelParam = std::make_unique<juce::AudioParameterFloat>(OSC3_LEVEL_ID, OSC3_LEVEL_NAME, 0.0f, 1.0f, 0.5f);
+    params.push_back(std::move(osc3LevelParam));
+    
+    auto fltTypeParam = std::make_unique<juce::AudioParameterFloat>(FLT_TYPE_ID, FLT_TYPE_NAME, 0.0f, 2.0f, 0.0f);
+    params.push_back(std::move(fltTypeParam));
     // THIS is how to work around that issue with skewing the dial on a value that's tied into an AudioProcessorValueTreeState.
     juce::NormalisableRange<float> cutoffRange(20.0f, 20000.0f);
     cutoffRange.setSkewForCentre(1000.0f);
-    auto flt1CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT1_CUTOFF_ID, FLT1_CUTOFF_NAME, cutoffRange, 1000.0f, "Hz");
-    params.push_back(std::move(flt1CutoffParam));
+    auto fltCutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT_CUTOFF_ID, FLT_CUTOFF_NAME, cutoffRange, 1000.0f, "Hz");
+    params.push_back(std::move(fltCutoffParam));
+    auto fltResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT_RESONANCE_ID, FLT_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
+    params.push_back(std::move(fltResonanceParam));
     
-    auto flt1ResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT1_RESONANCE_ID, FLT1_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
-    params.push_back(std::move(flt1ResonanceParam));
-
-    auto osc2TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC2_TYPE_ID, OSC2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
-    params.push_back(std::move(osc2TypeParam));
-
-    auto env2AttackParam = std::make_unique<juce::AudioParameterFloat>(ENV2_ATTACK_ID, ENV2_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
-    params.push_back(std::move(env2AttackParam));
-    auto env2DecayParam = std::make_unique<juce::AudioParameterFloat>(ENV2_DECAY_ID, ENV2_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
-    params.push_back(std::move(env2DecayParam));
-    auto env2SustainParam = std::make_unique<juce::AudioParameterFloat>(ENV2_SUSTAIN_ID, ENV2_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
-    params.push_back(std::move(env2SustainParam));
-    auto env2ReleaseParam = std::make_unique<juce::AudioParameterFloat>(ENV2_RELEASE_ID, ENV2_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
-    params.push_back(std::move(env2ReleaseParam));
-
-    auto flt2TypeParam = std::make_unique<juce::AudioParameterFloat>(FLT2_TYPE_ID, FLT2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
-    params.push_back(std::move(flt2TypeParam));
-
-    auto flt2CutoffParam = std::make_unique<juce::AudioParameterFloat>(FLT2_CUTOFF_ID, FLT2_CUTOFF_NAME, cutoffRange, 1000.0f, "Hz");
-    params.push_back(std::move(flt2CutoffParam));
+    auto fltEnvAttackParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_ATTACK_ID, FLT_ENV_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
+    params.push_back(std::move(fltEnvAttackParam));
+    auto fltEnvDecayParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_DECAY_ID, FLT_ENV_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
+    params.push_back(std::move(fltEnvDecayParam));
+    auto fltEnvSustainParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_SUSTAIN_ID, FLT_ENV_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
+    params.push_back(std::move(fltEnvSustainParam));
+    auto fltEnvReleaseParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_RELEASE_ID, FLT_ENV_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
+    params.push_back(std::move(fltEnvReleaseParam));
     
-    auto flt2ResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT2_RESONANCE_ID, FLT2_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
-    params.push_back(std::move(flt2ResonanceParam));
+    auto ampEnvAttackParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_ATTACK_ID, AMP_ENV_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
+    params.push_back(std::move(ampEnvAttackParam));
+    auto ampEnvDecayParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_DECAY_ID, AMP_ENV_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
+    params.push_back(std::move(ampEnvDecayParam));
+    auto ampEnvSustainParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_SUSTAIN_ID, AMP_ENV_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
+    params.push_back(std::move(ampEnvSustainParam));
+    auto ampEnvReleaseParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_RELEASE_ID, AMP_ENV_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
+    params.push_back(std::move(ampEnvReleaseParam));
 
     return { params.begin(), params.end() };
 }
@@ -164,13 +160,9 @@ void BasicsubtractivesynthAudioProcessor::prepareToPlay (double sampleRate, int 
     spec.maximumBlockSize = samplesPerBlock;
     spec.numChannels = getTotalNumOutputChannels();
     
-    filter1.reset();
-    filter2.reset();
-    
-    filter1.prepare(spec);
-    filter2.prepare(spec);
-    
-    updateFilters();
+    filter.reset();
+    filter.prepare(spec);
+    updateFilter();
 }
 
 void BasicsubtractivesynthAudioProcessor::releaseResources()
@@ -203,46 +195,26 @@ bool BasicsubtractivesynthAudioProcessor::isBusesLayoutSupported (const BusesLay
 }
 #endif
 
-void BasicsubtractivesynthAudioProcessor::updateFilters()
+void BasicsubtractivesynthAudioProcessor::updateFilter()
 {
-    int flt1_type = *treeState.getRawParameterValue(FLT1_TYPE_ID);
-    int flt1_cutoff = *treeState.getRawParameterValue(FLT1_CUTOFF_ID);
-    int flt1_resonance = *treeState.getRawParameterValue(FLT1_RESONANCE_ID);
+    int flt_type = *treeState.getRawParameterValue(FLT_TYPE_ID);
+    int flt_cutoff = *treeState.getRawParameterValue(FLT_CUTOFF_ID);
+    int flt_resonance = *treeState.getRawParameterValue(FLT_RESONANCE_ID);
     
-    if (flt1_type == 0)
+    if (flt_type == 0)
     {
-        filter1.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
-        filter1.state->setCutOffFrequency(lastSampleRate, flt1_cutoff, flt1_resonance);
+        filter.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
+        filter.state->setCutOffFrequency(lastSampleRate, flt_cutoff, flt_resonance);
     }
-    else if (flt1_type == 1)
+    else if (flt_type == 1)
     {
-        filter1.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::highPass;
-        filter1.state->setCutOffFrequency(lastSampleRate, flt1_cutoff, flt1_resonance);
+        filter.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::highPass;
+        filter.state->setCutOffFrequency(lastSampleRate, flt_cutoff, flt_resonance);
     }
-    else if (flt1_type == 2)
+    else if (flt_type == 2)
     {
-        filter1.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::bandPass;
-        filter1.state->setCutOffFrequency(lastSampleRate, flt1_cutoff, flt1_resonance);
-    }
-    
-    int flt2_type = *treeState.getRawParameterValue(FLT2_TYPE_ID);
-    int flt2_cutoff = *treeState.getRawParameterValue(FLT2_CUTOFF_ID);
-    int flt2_resonance = *treeState.getRawParameterValue(FLT2_RESONANCE_ID);
-    
-    if (flt2_type == 0)
-    {
-        filter2.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
-        filter2.state->setCutOffFrequency(lastSampleRate, flt2_cutoff, flt2_resonance);
-    }
-    else if (flt2_type == 1)
-    {
-        filter2.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::highPass;
-        filter2.state->setCutOffFrequency(lastSampleRate, flt2_cutoff, flt2_resonance);
-    }
-    else if (flt2_type == 2)
-    {
-        filter2.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::bandPass;
-        filter2.state->setCutOffFrequency(lastSampleRate, flt2_cutoff, flt2_resonance);
+        filter.state->type = juce::dsp::StateVariableFilter::Parameters<float>::Type::bandPass;
+        filter.state->setCutOffFrequency(lastSampleRate, flt_cutoff, flt_resonance);
     }
 }
 
@@ -253,45 +225,43 @@ void BasicsubtractivesynthAudioProcessor::processBlock (juce::AudioBuffer<float>
         if ((myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i))))
         {
             // workaround suggested in YouTube comments
-            float* env1_attackPtr = (float*) treeState.getRawParameterValue(ENV1_ATTACK_ID);
-            float* env1_decayPtr = (float*) treeState.getRawParameterValue(ENV1_DECAY_ID);
-            float* env1_sustainPtr = (float*) treeState.getRawParameterValue(ENV1_SUSTAIN_ID);
-            float* env1_releasePtr = (float*) treeState.getRawParameterValue(ENV1_RELEASE_ID);
-            myVoice->setEnv1Params(env1_attackPtr, env1_decayPtr, env1_sustainPtr, env1_releasePtr);
-            
-            float* env2_attackPtr = (float*) treeState.getRawParameterValue(ENV2_ATTACK_ID);
-            float* env2_decayPtr = (float*) treeState.getRawParameterValue(ENV2_DECAY_ID);
-            float* env2_sustainPtr = (float*) treeState.getRawParameterValue(ENV2_SUSTAIN_ID);
-            float* env2_releasePtr = (float*) treeState.getRawParameterValue(ENV2_RELEASE_ID);
-            myVoice->setEnv2Params(env2_attackPtr, env2_decayPtr, env2_sustainPtr, env2_releasePtr);
-            
             float* osc1_typePtr = (float*) treeState.getRawParameterValue(OSC1_TYPE_ID);
             myVoice->setOsc1Type(osc1_typePtr);
             
             float* osc2_typePtr = (float*) treeState.getRawParameterValue(OSC2_TYPE_ID);
             myVoice->setOsc2Type(osc2_typePtr);
             
-            float* flt1_typePtr = (float*) treeState.getRawParameterValue(FLT1_TYPE_ID);
-            float* flt1_cutoffPtr = (float*) treeState.getRawParameterValue(FLT1_CUTOFF_ID);
-            float* flt1_resonancePtr = (float*) treeState.getRawParameterValue(FLT1_RESONANCE_ID);
-            myVoice->setFlt1Params(flt1_typePtr, flt1_cutoffPtr, flt1_resonancePtr);
+            float* osc3_typePtr = (float*) treeState.getRawParameterValue(OSC3_TYPE_ID);
+            myVoice->setOsc3Type(osc3_typePtr);
             
-            float* flt2_typePtr = (float*) treeState.getRawParameterValue(FLT2_TYPE_ID);
-            float* flt2_cutoffPtr = (float*) treeState.getRawParameterValue(FLT2_CUTOFF_ID);
-            float* flt2_resonancePtr = (float*) treeState.getRawParameterValue(FLT2_RESONANCE_ID);
-            myVoice->setFlt1Params(flt2_typePtr, flt2_cutoffPtr, flt2_resonancePtr);
+            float* flt_typePtr = (float*) treeState.getRawParameterValue(FLT_TYPE_ID);
+            float* flt_cutoffPtr = (float*) treeState.getRawParameterValue(FLT_CUTOFF_ID);
+            float* flt_resonancePtr = (float*) treeState.getRawParameterValue(FLT_RESONANCE_ID);
+            myVoice->setFltParams(flt_typePtr, flt_cutoffPtr, flt_resonancePtr);
+            
+            float* fltEnv_attackPtr = (float*) treeState.getRawParameterValue(FLT_ENV_ATTACK_ID);
+            float* fltEnv_decayPtr = (float*) treeState.getRawParameterValue(FLT_ENV_DECAY_ID);
+            float* fltEnv_sustainPtr = (float*) treeState.getRawParameterValue(FLT_ENV_SUSTAIN_ID);
+            float* fltEnv_releasePtr = (float*) treeState.getRawParameterValue(FLT_ENV_RELEASE_ID);
+            myVoice->setFltEnvParams(fltEnv_attackPtr, fltEnv_decayPtr, fltEnv_sustainPtr, fltEnv_releasePtr);
+            
+            float* ampEnv_attackPtr = (float*) treeState.getRawParameterValue(AMP_ENV_ATTACK_ID);
+            float* ampEnv_decayPtr = (float*) treeState.getRawParameterValue(AMP_ENV_DECAY_ID);
+            float* ampEnv_sustainPtr = (float*) treeState.getRawParameterValue(AMP_ENV_SUSTAIN_ID);
+            float* ampEnv_releasePtr = (float*) treeState.getRawParameterValue(AMP_ENV_RELEASE_ID);
+            myVoice->setAmpEnvParams(ampEnv_attackPtr, ampEnv_decayPtr, ampEnv_sustainPtr, ampEnv_releasePtr);
         }
     }
     
     buffer.clear();
     mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
-    updateFilters();
+    updateFilter();
     
     juce::dsp::AudioBlock<float> block(buffer);
     
     // TODO: mySynth.renderNextBlock is handing over the sum of both oscillators, so we are unable
     // to make use of the second filter. Figure out a solution for this.
-    filter1.process(juce::dsp::ProcessContextReplacing<float>(block));
+    filter.process(juce::dsp::ProcessContextReplacing<float>(block));
 }
 
 //==============================================================================

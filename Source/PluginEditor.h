@@ -32,14 +32,16 @@ private:
     // access the processor object that created it.
     BasicsubtractivesynthAudioProcessor& audioProcessor;
     
+    // TODO: Rename classes to express that they're views rather than synthesis components? i.e. "OscillatorPanel" instead of just "Oscillator"
+    
     Oscillator osc1Gui;
     Oscillator osc2Gui;
+    Oscillator osc3Gui;
 
-    Envelope env1Gui;
-    Envelope env2Gui;
+    Envelope fltEnvGui;
+    Envelope ampEnvGui;
 
-    Filter flt1Gui;
-    Filter flt2Gui;
+    Filter fltGui;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicsubtractivesynthAudioProcessorEditor)
 };
