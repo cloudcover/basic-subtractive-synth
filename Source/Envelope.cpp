@@ -3,7 +3,7 @@
 
     Envelope.cpp
     Created: 5 Oct 2020 11:41:07am
-    Author:  nicks
+    Author:  nick.suda@gmail.com
 
   ==============================================================================
 */

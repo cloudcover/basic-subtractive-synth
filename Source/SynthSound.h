@@ -3,7 +3,7 @@
 
     SynthSound.h
     Created: 5 Oct 2020 11:40:06am
-    Author:  nicks
+    Author:  nick.suda@gmail.com
 
   ==============================================================================
 */
