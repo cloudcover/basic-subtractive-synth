@@ -1,7 +1,7 @@
 #include <JuceHeader.h>
 #include "EnvelopeView.h"
 
-EnvelopeView::EnvelopeView(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
+EnvelopeView::EnvelopeView(BasicSubtractiveSynthAudioProcessor& p) : audioProcessor(p)
 {
     setSize(200, 200);
 

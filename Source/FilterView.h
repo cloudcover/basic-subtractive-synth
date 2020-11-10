@@ -6,7 +6,7 @@
 class FilterView : public juce::Component
 {
 public:
-    FilterView(BasicsubtractivesynthAudioProcessor&);
+    FilterView(BasicSubtractiveSynthAudioProcessor&);
     ~FilterView() override;
 
     void paint (juce::Graphics&) override;

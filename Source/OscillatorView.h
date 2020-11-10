@@ -6,14 +6,14 @@
 class OscillatorView : public juce::Component
 {
 public:
-    OscillatorView(BasicsubtractivesynthAudioProcessor&);
+    OscillatorView(BasicSubtractiveSynthAudioProcessor&);
     ~OscillatorView() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    BasicsubtractivesynthAudioProcessor& audioProcessor;
+    BasicSubtractiveSynthAudioProcessor& audioProcessor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OscillatorView)
 
 public:

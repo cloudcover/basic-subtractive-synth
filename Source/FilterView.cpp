@@ -1,7 +1,7 @@
 #include <JuceHeader.h>
 #include "FilterView.h"
 
-FilterView::FilterView(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
+FilterView::FilterView(BasicSubtractiveSynthAudioProcessor& p) : audioProcessor(p)
 {
     setSize(200, 200);
     typeMenu.addItem("Low Pass", 1);

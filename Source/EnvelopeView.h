@@ -6,14 +6,14 @@
 class EnvelopeView : public juce::Component
 {
 public:
-    EnvelopeView(BasicsubtractivesynthAudioProcessor&);
+    EnvelopeView(BasicSubtractiveSynthAudioProcessor&);
     ~EnvelopeView() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    BasicsubtractivesynthAudioProcessor& audioProcessor;
+    BasicSubtractiveSynthAudioProcessor& audioProcessor;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EnvelopeView)
 
 public:

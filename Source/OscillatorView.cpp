@@ -1,7 +1,7 @@
 #include <JuceHeader.h>
 #include "OscillatorView.h"
 
-OscillatorView::OscillatorView(BasicsubtractivesynthAudioProcessor& p) : audioProcessor(p)
+OscillatorView::OscillatorView(BasicSubtractiveSynthAudioProcessor& p) : audioProcessor(p)
 {
     setSize(200, 200);
 
