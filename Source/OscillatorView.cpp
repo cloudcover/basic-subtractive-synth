@@ -23,7 +23,7 @@ void OscillatorView::paint (juce::Graphics& g)
 
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
-    g.drawText("Oscillator", titleArea, juce::Justification::centredTop);
+    g.drawText(overrideLabel, titleArea, juce::Justification::centredTop);
 
     juce::Rectangle<float> area(25, 25, 150, 150);
 

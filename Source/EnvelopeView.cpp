@@ -36,9 +36,7 @@ EnvelopeView::EnvelopeView(BasicSubtractiveSynthAudioProcessor& p) : audioProces
     // don't create bindings to ValueTreeState yet, since these are instanced for two voices
 }
 
-EnvelopeView::~EnvelopeView()
-{
-}
+EnvelopeView::~EnvelopeView() { }
 
 void EnvelopeView::paint (juce::Graphics& g)
 {

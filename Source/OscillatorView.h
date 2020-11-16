@@ -19,4 +19,6 @@ private:
 public:
     juce::ComboBox typeMenu;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> typeMenuValue;
+    
+    string overrideLabel = "Oscillator";
 };

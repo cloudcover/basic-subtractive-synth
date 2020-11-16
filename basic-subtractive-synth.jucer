@@ -12,6 +12,8 @@
         <FILE id="PLywFA" name="maximilian.cpp" compile="1" resource="0" file="../../Libraries/Maximilian/src/maximilian.cpp"/>
         <FILE id="v2EAUH" name="maximilian.h" compile="0" resource="0" file="../../Libraries/Maximilian/src/maximilian.h"/>
       </GROUP>
+      <FILE id="WpZUnL" name="MixerView.cpp" compile="1" resource="0" file="Source/MixerView.cpp"/>
+      <FILE id="saQWzi" name="MixerView.h" compile="0" resource="0" file="Source/MixerView.h"/>
       <FILE id="Sg03Jc" name="EnvelopeView.cpp" compile="1" resource="0"
             file="Source/EnvelopeView.cpp"/>
       <FILE id="TTyvZq" name="EnvelopeView.h" compile="0" resource="0" file="Source/EnvelopeView.h"/>

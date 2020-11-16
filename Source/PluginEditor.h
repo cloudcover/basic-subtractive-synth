@@ -2,9 +2,10 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "OscillatorView.h"
+#include "MixerView.h"
 #include "EnvelopeView.h"
 #include "FilterView.h"
-#include "OscillatorView.h"
 
 class BasicSubtractiveSynthAudioProcessorEditor : public juce::AudioProcessorEditor
 {
@@ -21,6 +22,8 @@ private:
     OscillatorView osc1Gui;
     OscillatorView osc2Gui;
     OscillatorView osc3Gui;
+    
+    MixerView mixerGui;
 
     EnvelopeView fltEnvGui;
     EnvelopeView ampEnvGui;
