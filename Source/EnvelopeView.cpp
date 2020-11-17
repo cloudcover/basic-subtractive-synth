@@ -48,10 +48,10 @@ void EnvelopeView::paint (juce::Graphics& g)
     g.drawText(overrideLabel, titleArea, juce::Justification::centredTop);
 
     //static positions for now due to time, make dynamic later
-    g.drawText("A", 53, 150, 20, 20, juce::Justification::centredTop);
-    g.drawText("D", 77, 150, 20, 20, juce::Justification::centredTop);
-    g.drawText("S", 103, 150, 20, 20, juce::Justification::centredTop);
-    g.drawText("R", 128, 150, 20, 20, juce::Justification::centredTop);
+    g.drawText("A", 45, 160, 20, 20, juce::Justification::centredTop);
+    g.drawText("D", 75, 160, 20, 20, juce::Justification::centredTop);
+    g.drawText("S", 105, 160, 20, 20, juce::Justification::centredTop);
+    g.drawText("R", 135, 160, 20, 20, juce::Justification::centredTop);
 
     juce::Rectangle<float> area(25, 25, 150, 150);
 
@@ -62,14 +62,14 @@ void EnvelopeView::paint (juce::Graphics& g)
 void EnvelopeView::resized()
 {
     //draws the sliders...we use a rectangle object to dynamically size the UI (if we want to resize for IPad etc without needing to change ALL settings)
-    juce::Rectangle<int> area = getLocalBounds().reduced(50);
+    juce::Rectangle<int> area = getLocalBounds().reduced(40);
 
-    int sliderWidth = 25;
+    int sliderWidth = 30;
     int sliderHeight = 175;
 
     //draw sliders by reducing area from rectangle above
-    attackSlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight).withTrimmedTop(10));
-    decaySlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight).withTrimmedTop(10));
-    sustainSlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight).withTrimmedTop(10));
-    releaseSlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight).withTrimmedTop(10));
+    attackSlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight));
+    decaySlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight));
+    sustainSlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight));
+    releaseSlider.setBounds(area.removeFromLeft(sliderWidth).removeFromTop(sliderHeight));
 }

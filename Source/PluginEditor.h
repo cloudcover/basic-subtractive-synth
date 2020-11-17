@@ -22,12 +22,8 @@ private:
     OscillatorView osc1Gui;
     OscillatorView osc2Gui;
     OscillatorView osc3Gui;
-    
     MixerView mixerGui;
-
-    EnvelopeView fltEnvGui;
-    EnvelopeView ampEnvGui;
-
+    EnvelopeView envGui;
     FilterView fltGui;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSubtractiveSynthAudioProcessorEditor)

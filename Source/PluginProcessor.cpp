@@ -54,23 +54,14 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicSubtractiveSynthAudioPr
     auto fltResonanceParam = std::make_unique<juce::AudioParameterFloat>(FLT_RESONANCE_ID, FLT_RESONANCE_NAME, 1.0f, 5.0f, 1.0f);
     params.push_back(std::move(fltResonanceParam));
     
-    auto fltEnvAttackParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_ATTACK_ID, FLT_ENV_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
-    params.push_back(std::move(fltEnvAttackParam));
-    auto fltEnvDecayParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_DECAY_ID, FLT_ENV_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
-    params.push_back(std::move(fltEnvDecayParam));
-    auto fltEnvSustainParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_SUSTAIN_ID, FLT_ENV_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
-    params.push_back(std::move(fltEnvSustainParam));
-    auto fltEnvReleaseParam = std::make_unique<juce::AudioParameterFloat>(FLT_ENV_RELEASE_ID, FLT_ENV_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
-    params.push_back(std::move(fltEnvReleaseParam));
-    
-    auto ampEnvAttackParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_ATTACK_ID, AMP_ENV_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
-    params.push_back(std::move(ampEnvAttackParam));
-    auto ampEnvDecayParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_DECAY_ID, AMP_ENV_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
-    params.push_back(std::move(ampEnvDecayParam));
-    auto ampEnvSustainParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_SUSTAIN_ID, AMP_ENV_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
-    params.push_back(std::move(ampEnvSustainParam));
-    auto ampEnvReleaseParam = std::make_unique<juce::AudioParameterFloat>(AMP_ENV_RELEASE_ID, AMP_ENV_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
-    params.push_back(std::move(ampEnvReleaseParam));
+    auto envAttackParam = std::make_unique<juce::AudioParameterFloat>(ENV_ATTACK_ID, ENV_ATTACK_NAME, 0.1f, 5000.0f, 100.0f);
+    params.push_back(std::move(envAttackParam));
+    auto envDecayParam = std::make_unique<juce::AudioParameterFloat>(ENV_DECAY_ID, ENV_DECAY_NAME, 1.0f, 2000.0f, 100.0f);
+    params.push_back(std::move(envDecayParam));
+    auto envSustainParam = std::make_unique<juce::AudioParameterFloat>(ENV_SUSTAIN_ID, ENV_SUSTAIN_NAME, 0.0f, 1.0f, 0.8f);
+    params.push_back(std::move(envSustainParam));
+    auto envReleaseParam = std::make_unique<juce::AudioParameterFloat>(ENV_RELEASE_ID, ENV_RELEASE_NAME, 0.1f, 5000.0f, 1000.0f);
+    params.push_back(std::move(envReleaseParam));
 
     return { params.begin(), params.end() };
 }
@@ -194,17 +185,11 @@ void BasicSubtractiveSynthAudioProcessor::processBlock (juce::AudioBuffer<float>
             float* flt_resonancePtr = (float*) treeState.getRawParameterValue(FLT_RESONANCE_ID);
             myVoice->setFltParams(flt_typePtr, flt_cutoffPtr, flt_resonancePtr);
             
-            float* fltEnv_attackPtr = (float*) treeState.getRawParameterValue(FLT_ENV_ATTACK_ID);
-            float* fltEnv_decayPtr = (float*) treeState.getRawParameterValue(FLT_ENV_DECAY_ID);
-            float* fltEnv_sustainPtr = (float*) treeState.getRawParameterValue(FLT_ENV_SUSTAIN_ID);
-            float* fltEnv_releasePtr = (float*) treeState.getRawParameterValue(FLT_ENV_RELEASE_ID);
-            myVoice->setFltEnvParams(fltEnv_attackPtr, fltEnv_decayPtr, fltEnv_sustainPtr, fltEnv_releasePtr);
-            
-            float* ampEnv_attackPtr = (float*) treeState.getRawParameterValue(AMP_ENV_ATTACK_ID);
-            float* ampEnv_decayPtr = (float*) treeState.getRawParameterValue(AMP_ENV_DECAY_ID);
-            float* ampEnv_sustainPtr = (float*) treeState.getRawParameterValue(AMP_ENV_SUSTAIN_ID);
-            float* ampEnv_releasePtr = (float*) treeState.getRawParameterValue(AMP_ENV_RELEASE_ID);
-            myVoice->setAmpEnvParams(ampEnv_attackPtr, ampEnv_decayPtr, ampEnv_sustainPtr, ampEnv_releasePtr);
+            float* env_attackPtr = (float*) treeState.getRawParameterValue(ENV_ATTACK_ID);
+            float* env_decayPtr = (float*) treeState.getRawParameterValue(ENV_DECAY_ID);
+            float* env_sustainPtr = (float*) treeState.getRawParameterValue(ENV_SUSTAIN_ID);
+            float* env_releasePtr = (float*) treeState.getRawParameterValue(ENV_RELEASE_ID);
+            myVoice->setEnvParams(env_attackPtr, env_decayPtr, env_sustainPtr, env_releasePtr);
         }
     }
     

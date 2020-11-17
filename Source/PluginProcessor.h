@@ -24,23 +24,14 @@
 #define FLT_RESONANCE_ID "flt-resonance"
 #define FLT_RESONANCE_NAME "Flt Resonance"
 
-#define FLT_ENV_ATTACK_ID "flt-env-attack"
-#define FLT_ENV_ATTACK_NAME "Filter Env Attack"
-#define FLT_ENV_DECAY_ID "flt-env-decay"
-#define FLT_ENV_DECAY_NAME "Filter Env Decay"
-#define FLT_ENV_SUSTAIN_ID "flt-env-sustain"
-#define FLT_ENV_SUSTAIN_NAME "Filter Env Sustain"
-#define FLT_ENV_RELEASE_ID "flt-env-release"
-#define FLT_ENV_RELEASE_NAME "Filter Env Release"
-
-#define AMP_ENV_ATTACK_ID "amp-env-attack"
-#define AMP_ENV_ATTACK_NAME "Amp Env Attack"
-#define AMP_ENV_DECAY_ID "amp-env-decay"
-#define AMP_ENV_DECAY_NAME "Amp Env Decay"
-#define AMP_ENV_SUSTAIN_ID "amp-env-sustain"
-#define AMP_ENV_SUSTAIN_NAME "Amp Env Sustain"
-#define AMP_ENV_RELEASE_ID "amp-env-release"
-#define AMP_ENV_RELEASE_NAME "Amp Env Release"
+#define ENV_ATTACK_ID "env-attack"
+#define ENV_ATTACK_NAME "Env Attack"
+#define ENV_DECAY_ID "env-decay"
+#define ENV_DECAY_NAME "Env Decay"
+#define ENV_SUSTAIN_ID "env-sustain"
+#define ENV_SUSTAIN_NAME "Env Sustain"
+#define ENV_RELEASE_ID "env-release"
+#define ENV_RELEASE_NAME "Env Release"
 
 class BasicSubtractiveSynthAudioProcessor  : public juce::AudioProcessor
 {

@@ -14,7 +14,6 @@ class SynthVoice : public juce::SynthesiserVoice
     
     void startNote (int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
     {
-        filterEnv.trigger = 1;
         ampEnv.trigger = 1;
         
         // TODO: make actual use of the incoming velocity value.
@@ -25,7 +24,6 @@ class SynthVoice : public juce::SynthesiserVoice
     
     void stopNote (float velocity, bool allowTailOff)
     {
-        filterEnv.trigger = 0;
         ampEnv.trigger = 0;
         
         if (velocity == 0)
@@ -58,7 +56,6 @@ class SynthVoice : public juce::SynthesiserVoice
     }
     
     // ================ other functions ================
-    
     void setOsc1Type(float* selection)
     {
         osc1_waveformType = *selection;
@@ -98,15 +95,19 @@ class SynthVoice : public juce::SynthesiserVoice
         return osc2.sinewave(frequency);
     }
     
-    void setFltEnvParams(float* attack, float* decay, float* sustain, float* release)
+    double getOsc3Output()
     {
-        filterEnv.setAttack(double(*attack));
-        filterEnv.setDecay(double(*decay));
-        filterEnv.setSustain(double(*sustain));
-        filterEnv.setRelease(double(*release));
+        switch (osc3_waveformType)
+        {
+            case 0: return osc3.sinewave(frequency);
+            case 1: return osc3.saw(frequency);
+            case 2: return osc3.square(frequency);
+        }
+        
+        return osc3.sinewave(frequency);
     }
     
-    void setAmpEnvParams(float* attack, float* decay, float* sustain, float* release)
+    void setEnvParams(float* attack, float* decay, float* sustain, float* release)
     {
         ampEnv.setAttack(double(*attack));
         ampEnv.setDecay(double(*decay));
@@ -123,10 +124,11 @@ class SynthVoice : public juce::SynthesiserVoice
     
     double getSummedOscillators()
     {
-        double osc1 = filterEnv.adsr(getOsc1Output(), filterEnv.trigger) / 2.0f;
-        double osc2 = ampEnv.adsr(getOsc2Output(), ampEnv.trigger) / 2.0f;
+        double osc1 = ampEnv.adsr(getOsc1Output(), ampEnv.trigger) / 3.0f;
+        double osc2 = ampEnv.adsr(getOsc2Output(), ampEnv.trigger) / 3.0f;
+        double osc3 = ampEnv.adsr(getOsc3Output(), ampEnv.trigger) / 3.0f;
         
-        return osc1 + osc2;
+        return osc1 + osc2 + osc3;
     }
     
 private:
@@ -143,7 +145,6 @@ private:
     maxiOsc osc3;
     
     // ENVELOPES
-    maxiEnv filterEnv;
     maxiEnv ampEnv;
     
     // FILTER PARAMETERS
