@@ -17,7 +17,6 @@ class SynthVoice : public juce::SynthesiserVoice
         ampEnv.trigger = 1;
         
         // TODO: make actual use of the incoming velocity value.
-        level = velocity;
         
         frequency = juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber);
     }
@@ -122,26 +121,35 @@ class SynthVoice : public juce::SynthesiserVoice
         fltResonance = *filterRes;
     }
     
+    void setOscLevels(float* osc1Level, float* osc2Level, float* osc3Level)
+    {
+        osc1_level = *osc1Level;
+        osc2_level = *osc2Level;
+        osc3_level = *osc3Level;
+    }
+    
     double getSummedOscillators()
     {
-        double osc1 = ampEnv.adsr(getOsc1Output(), ampEnv.trigger) / 3.0f;
-        double osc2 = ampEnv.adsr(getOsc2Output(), ampEnv.trigger) / 3.0f;
-        double osc3 = ampEnv.adsr(getOsc3Output(), ampEnv.trigger) / 3.0f;
+        double osc1 = ampEnv.adsr(getOsc1Output(), ampEnv.trigger) / 3.0f * osc1_level;
+        double osc2 = ampEnv.adsr(getOsc2Output(), ampEnv.trigger) / 3.0f * osc2_level;
+        double osc3 = ampEnv.adsr(getOsc3Output(), ampEnv.trigger) / 3.0f * osc3_level;
         
         return osc1 + osc2 + osc3;
     }
     
 private:
     // VOICE INFO
-    double level;
     double frequency;
     
     // OSCILLATORS
     int osc1_waveformType;
+    float osc1_level;
     maxiOsc osc1;
     int osc2_waveformType;
+    float osc2_level;
     maxiOsc osc2;
     int osc3_waveformType;
+    float osc3_level;
     maxiOsc osc3;
     
     // ENVELOPES

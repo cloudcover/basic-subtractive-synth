@@ -180,6 +180,11 @@ void BasicSubtractiveSynthAudioProcessor::processBlock (juce::AudioBuffer<float>
             float* osc3_typePtr = (float*) treeState.getRawParameterValue(OSC3_TYPE_ID);
             myVoice->setOsc3Type(osc3_typePtr);
             
+            float* osc1_levelPtr = (float*) treeState.getRawParameterValue(OSC1_LEVEL_ID);
+            float* osc2_levelPtr = (float*) treeState.getRawParameterValue(OSC2_LEVEL_ID);
+            float* osc3_levelPtr = (float*) treeState.getRawParameterValue(OSC3_LEVEL_ID);
+            myVoice->setOscLevels(osc1_levelPtr, osc2_levelPtr, osc3_levelPtr);
+            
             float* flt_typePtr = (float*) treeState.getRawParameterValue(FLT_TYPE_ID);
             float* flt_cutoffPtr = (float*) treeState.getRawParameterValue(FLT_CUTOFF_ID);
             float* flt_resonancePtr = (float*) treeState.getRawParameterValue(FLT_RESONANCE_ID);
