@@ -106,6 +106,21 @@ class SynthVoice : public juce::SynthesiserVoice
         return osc3.sinewave(frequency);
     }
     
+    void setOsc1OctaveOffset(int* offset)
+    {
+        osc1_octaveOffset = *offset;
+    }
+    
+    void setOsc2OctaveOffset(int* offset)
+    {
+        osc2_octaveOffset = *offset;
+    }
+    
+    void setOsc3OctaveOffset(int* offset)
+    {
+        osc3_octaveOffset = *offset;
+    }
+    
     void setEnvParams(float* attack, float* decay, float* sustain, float* release)
     {
         ampEnv.setAttack(double(*attack));
@@ -144,12 +159,17 @@ private:
     // OSCILLATORS
     int osc1_waveformType;
     float osc1_level;
+    int osc1_octaveOffset;
     maxiOsc osc1;
+    
     int osc2_waveformType;
     float osc2_level;
+    int osc2_octaveOffset;
     maxiOsc osc2;
+    
     int osc3_waveformType;
     float osc3_level;
+    int osc3_octaveOffset;
     maxiOsc osc3;
     
     // ENVELOPES

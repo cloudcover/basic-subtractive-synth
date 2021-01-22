@@ -35,14 +35,22 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicSubtractiveSynthAudioPr
     params.push_back(std::move(osc1TypeParam));
     auto osc1LevelParam = std::make_unique<juce::AudioParameterFloat>(OSC1_LEVEL_ID, OSC1_LEVEL_NAME, 0.0f, 1.0f, 0.5f);
     params.push_back(std::move(osc1LevelParam));
+    auto osc1OctaveParam = std::make_unique<juce::AudioParameterInt>(OSC1_OCTAVE_ID, OSC1_LEVEL_ID, 1, 5, 3);
+    params.push_back(std::move(osc1OctaveParam));
+    
     auto osc2TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC2_TYPE_ID, OSC2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
     params.push_back(std::move(osc2TypeParam));
     auto osc2LevelParam = std::make_unique<juce::AudioParameterFloat>(OSC2_LEVEL_ID, OSC2_LEVEL_NAME, 0.0f, 1.0f, 0.5f);
     params.push_back(std::move(osc2LevelParam));
+    auto osc2OctaveParam = std::make_unique<juce::AudioParameterInt>(OSC2_OCTAVE_ID, OSC2_OCTAVE_NAME, 1, 5, 3);
+    params.push_back(std::move(osc2OctaveParam));
+    
     auto osc3TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC3_TYPE_ID, OSC3_TYPE_NAME, 0.0f, 2.0f, 0.0f);
     params.push_back(std::move(osc3TypeParam));
     auto osc3LevelParam = std::make_unique<juce::AudioParameterFloat>(OSC3_LEVEL_ID, OSC3_LEVEL_NAME, 0.0f, 1.0f, 0.5f);
     params.push_back(std::move(osc3LevelParam));
+    auto osc3OctaveParam = std::make_unique<juce::AudioParameterInt>(OSC3_OCTAVE_ID, OSC3_OCTAVE_NAME, 1, 5, 3);
+    params.push_back(std::move(osc3OctaveParam));
     
     auto fltTypeParam = std::make_unique<juce::AudioParameterFloat>(FLT_TYPE_ID, FLT_TYPE_NAME, 0.0f, 2.0f, 0.0f);
     params.push_back(std::move(fltTypeParam));
@@ -179,6 +187,15 @@ void BasicSubtractiveSynthAudioProcessor::processBlock (juce::AudioBuffer<float>
             
             float* osc3_typePtr = (float*) treeState.getRawParameterValue(OSC3_TYPE_ID);
             myVoice->setOsc3Type(osc3_typePtr);
+            
+            int* osc1_octavePtr = (int*) treeState.getRawParameterValue(OSC1_OCTAVE_ID);
+            myVoice->setOsc1OctaveOffset(osc1_octavePtr);
+            
+            int* osc2_octavePtr = (int*) treeState.getRawParameterValue(OSC2_OCTAVE_ID);
+            myVoice->setOsc2OctaveOffset(osc2_octavePtr);
+            
+            int* osc3_octavePtr = (int*) treeState.getRawParameterValue(OSC3_OCTAVE_ID);
+            myVoice->setOsc3OctaveOffset(osc3_octavePtr);
             
             float* osc1_levelPtr = (float*) treeState.getRawParameterValue(OSC1_LEVEL_ID);
             float* osc2_levelPtr = (float*) treeState.getRawParameterValue(OSC2_LEVEL_ID);

@@ -10,6 +10,14 @@ OscillatorView::OscillatorView(BasicSubtractiveSynthAudioProcessor& p) : audioPr
     typeMenu.addItem("Square", 3);
     typeMenu.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(&typeMenu);
+    
+    octaveMenu.addItem("-2", 1);
+    octaveMenu.addItem("-1", 2);
+    octaveMenu.addItem("0", 3);
+    octaveMenu.addItem("+1", 4);
+    octaveMenu.addItem("+2", 5);
+    octaveMenu.setJustificationType(juce::Justification::centred);
+    addAndMakeVisible(&octaveMenu);
 }
 
 OscillatorView::~OscillatorView()
@@ -35,4 +43,5 @@ void OscillatorView::resized()
 {
     juce::Rectangle<int> area = getLocalBounds().reduced(40);
     typeMenu.setBounds(area.removeFromTop(20));
+    octaveMenu.setBounds(area.removeFromTop(20));
 }

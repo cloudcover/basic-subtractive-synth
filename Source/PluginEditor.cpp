@@ -2,18 +2,23 @@
 #include "PluginEditor.h"
 
 BasicSubtractiveSynthAudioProcessorEditor::BasicSubtractiveSynthAudioProcessorEditor (BasicSubtractiveSynthAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), osc1Gui(p), osc2Gui(p), osc3Gui(p), fltGui(p), envGui(p), mixerGui(p)
+    : AudioProcessorEditor (&p), audioProcessor (p), osc1Gui(p), osc2Gui(p), osc3Gui(p), mixerGui(p), envGui(p), fltGui(p)
 {
     setSize (600, 600);
     
     // add the component instance bindings here instead of in the Component's constructor
     osc1Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC1_TYPE_ID, osc1Gui.typeMenu);
+    osc1Gui.octaveMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC1_OCTAVE_ID, osc1Gui.octaveMenu);
     osc1Gui.overrideLabel = "Oscillator 1";
     addAndMakeVisible(&osc1Gui);
+    
     osc2Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC2_TYPE_ID, osc2Gui.typeMenu);
+    osc2Gui.octaveMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC2_OCTAVE_ID, osc2Gui.octaveMenu);
     osc2Gui.overrideLabel = "Oscillator 2";
     addAndMakeVisible(&osc2Gui);
+    
     osc3Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC3_TYPE_ID, osc3Gui.typeMenu);
+    osc3Gui.octaveMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC3_OCTAVE_ID, osc3Gui.octaveMenu);
     osc3Gui.overrideLabel = "Oscillator 3";
     addAndMakeVisible(&osc3Gui);
     
