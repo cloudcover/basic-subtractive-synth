@@ -33,6 +33,10 @@ void OscillatorView::paint (juce::Graphics& g)
     g.setColour(juce::Colours::white);
     g.drawText(overrideLabel, titleArea, juce::Justification::centredTop);
 
+    // TODO: make these static positions dynamic
+    g.drawText("Waveform", 0, 40, 200, 15, juce::Justification::centredTop);
+    g.drawText("Octave", 0, 90, 200, 15, juce::Justification::centredTop);
+    
     juce::Rectangle<float> area(25, 25, 150, 150);
 
     g.setColour(juce::Colours::yellow);
@@ -42,6 +46,8 @@ void OscillatorView::paint (juce::Graphics& g)
 void OscillatorView::resized()
 {
     juce::Rectangle<int> area = getLocalBounds().reduced(40);
+    area.removeFromTop(20);
     typeMenu.setBounds(area.removeFromTop(20));
+    area.removeFromTop(30);
     octaveMenu.setBounds(area.removeFromTop(20));
 }
