@@ -35,7 +35,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicSubtractiveSynthAudioPr
     params.push_back(std::move(osc1TypeParam));
     auto osc1LevelParam = std::make_unique<juce::AudioParameterFloat>(OSC1_LEVEL_ID, OSC1_LEVEL_NAME, 0.0f, 1.0f, 0.5f);
     params.push_back(std::move(osc1LevelParam));
-    auto osc1OctaveParam = std::make_unique<juce::AudioParameterFloat>(OSC1_OCTAVE_ID, OSC1_LEVEL_ID, 0.0f, 4.0f, 2.0f);
+    auto osc1OctaveParam = std::make_unique<juce::AudioParameterFloat>(OSC1_OCTAVE_ID, OSC1_OCTAVE_NAME, 0.0f, 4.0f, 2.0f);
     params.push_back(std::move(osc1OctaveParam));
     
     auto osc2TypeParam = std::make_unique<juce::AudioParameterFloat>(OSC2_TYPE_ID, OSC2_TYPE_NAME, 0.0f, 2.0f, 0.0f);
