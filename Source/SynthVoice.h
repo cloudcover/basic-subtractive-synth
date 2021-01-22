@@ -74,9 +74,33 @@ class SynthVoice : public juce::SynthesiserVoice
     {
         switch (osc1_waveformType)
         {
-            case 0: return osc1.sinewave(frequency);
-            case 1: return osc1.saw(frequency);
-            case 2: return osc1.square(frequency);
+            case 0:
+                switch (osc1_octaveOffset)
+                {
+                    case 0: return osc1.sinewave(frequency * 0.25);
+                    case 1: return osc1.sinewave(frequency * 0.5);
+                    case 2: return osc1.sinewave(frequency);
+                    case 3: return osc1.sinewave(frequency * 2);
+                    case 4: return osc1.sinewave(frequency * 4);
+                }
+            case 1:
+                switch (osc1_octaveOffset)
+                {
+                    case 0: return osc1.saw(frequency * 0.25);
+                    case 1: return osc1.saw(frequency * 0.5);
+                    case 2: return osc1.saw(frequency);
+                    case 3: return osc1.saw(frequency * 2);
+                    case 4: return osc1.saw(frequency * 4);
+                }
+            case 2:
+                switch (osc1_octaveOffset)
+                {
+                    case 0: return osc1.square(frequency * 0.25);
+                    case 1: return osc1.square(frequency * 0.5);
+                    case 2: return osc1.square(frequency);
+                    case 3: return osc1.square(frequency * 2);
+                    case 4: return osc1.square(frequency * 4);
+                }
         }
         
         return osc1.sinewave(frequency);
@@ -86,9 +110,33 @@ class SynthVoice : public juce::SynthesiserVoice
     {
         switch (osc2_waveformType)
         {
-            case 0: return osc2.sinewave(frequency);
-            case 1: return osc2.saw(frequency);
-            case 2: return osc2.square(frequency);
+            case 0:
+                switch (osc2_octaveOffset)
+                {
+                    case 0: return osc2.sinewave(frequency * 0.25);
+                    case 1: return osc2.sinewave(frequency * 0.5);
+                    case 2: return osc2.sinewave(frequency);
+                    case 3: return osc2.sinewave(frequency * 2);
+                    case 4: return osc2.sinewave(frequency * 4);
+                }
+            case 1:
+                switch(osc2_octaveOffset)
+                {
+                    case 0: return osc2.saw(frequency * 0.25);
+                    case 1: return osc2.saw(frequency * 0.5);
+                    case 2: return osc2.saw(frequency);
+                    case 3: return osc2.saw(frequency * 2);
+                    case 4: return osc2.saw(frequency * 4);
+                }
+            case 2:
+                switch (osc2_octaveOffset)
+                {
+                    case 0: return osc2.square(frequency * 0.25);
+                    case 1: return osc2.square(frequency * 0.5);
+                    case 2: return osc2.square(frequency);
+                    case 3: return osc2.square(frequency * 2);
+                    case 4: return osc2.square(frequency * 4);
+                }
         }
         
         return osc2.sinewave(frequency);
@@ -98,25 +146,49 @@ class SynthVoice : public juce::SynthesiserVoice
     {
         switch (osc3_waveformType)
         {
-            case 0: return osc3.sinewave(frequency);
-            case 1: return osc3.saw(frequency);
-            case 2: return osc3.square(frequency);
+            case 0:
+                switch (osc3_octaveOffset)
+                {
+                    case 0: return osc3.sinewave(frequency * 0.25);
+                    case 1: return osc3.sinewave(frequency * 0.5);
+                    case 2: return osc3.sinewave(frequency);
+                    case 3: return osc3.sinewave(frequency * 2);
+                    case 4: return osc3.sinewave(frequency * 4);
+                }
+            case 1:
+                switch (osc3_octaveOffset)
+                {
+                    case 0: return osc3.saw(frequency * 0.25);
+                    case 1: return osc3.saw(frequency * 0.5);
+                    case 2: return osc3.saw(frequency);
+                    case 3: return osc3.saw(frequency * 2);
+                    case 4: return osc3.saw(frequency * 4);
+                }
+            case 2:
+                switch (osc3_octaveOffset)
+                {
+                    case 0: return osc3.square(frequency * 0.25);
+                    case 1: return osc3.square(frequency * 0.5);
+                    case 2: return osc3.square(frequency);
+                    case 3: return osc3.square(frequency * 2);
+                    case 4: return osc3.square(frequency * 4);
+                }
         }
         
         return osc3.sinewave(frequency);
     }
     
-    void setOsc1OctaveOffset(int* offset)
+    void setOsc1OctaveOffset(float* offset)
     {
         osc1_octaveOffset = *offset;
     }
     
-    void setOsc2OctaveOffset(int* offset)
+    void setOsc2OctaveOffset(float* offset)
     {
         osc2_octaveOffset = *offset;
     }
     
-    void setOsc3OctaveOffset(int* offset)
+    void setOsc3OctaveOffset(float* offset)
     {
         osc3_octaveOffset = *offset;
     }
