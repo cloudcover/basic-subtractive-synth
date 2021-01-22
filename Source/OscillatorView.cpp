@@ -3,7 +3,7 @@
 
 OscillatorView::OscillatorView(BasicSubtractiveSynthAudioProcessor& p) : audioProcessor(p)
 {
-    setSize(200, 200);
+    setSize(200, 133);
 
     typeMenu.addItem("Sine", 1);
     typeMenu.addItem("Saw", 2);
@@ -34,10 +34,10 @@ void OscillatorView::paint (juce::Graphics& g)
     g.drawText(overrideLabel, titleArea, juce::Justification::centredTop);
 
     // TODO: make these static positions dynamic
-    g.drawText("Waveform", 0, 40, 200, 15, juce::Justification::centredTop);
-    g.drawText("Octave", 0, 90, 200, 15, juce::Justification::centredTop);
+    g.drawText("Waveform", 0, 35, 200, 15, juce::Justification::centredTop);
+    g.drawText("Octave", 0, 75, 200, 15, juce::Justification::centredTop);
     
-    juce::Rectangle<float> area(25, 25, 150, 150);
+    juce::Rectangle<float> area(25, 25, 150, 100);
 
     g.setColour(juce::Colours::yellow);
     g.drawRoundedRectangle(area, 20.0f, 2.0f);
@@ -45,9 +45,9 @@ void OscillatorView::paint (juce::Graphics& g)
 
 void OscillatorView::resized()
 {
-    juce::Rectangle<int> area = getLocalBounds().reduced(40);
-    area.removeFromTop(20);
-    typeMenu.setBounds(area.removeFromTop(20));
-    area.removeFromTop(30);
-    octaveMenu.setBounds(area.removeFromTop(20));
+    juce::Rectangle<int> area = getLocalBounds().reduced(55, 0);
+    area.removeFromTop(50);
+    typeMenu.setBounds(area.removeFromTop(15));
+    area.removeFromTop(25);
+    octaveMenu.setBounds(area.removeFromTop(15));
 }

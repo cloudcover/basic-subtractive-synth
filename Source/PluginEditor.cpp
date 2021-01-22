@@ -4,7 +4,7 @@
 BasicSubtractiveSynthAudioProcessorEditor::BasicSubtractiveSynthAudioProcessorEditor (BasicSubtractiveSynthAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), osc1Gui(p), osc2Gui(p), osc3Gui(p), mixerGui(p), envGui(p), fltGui(p)
 {
-    setSize (600, 600);
+    setSize (600, 400);
     
     // add the component instance bindings here instead of in the Component's constructor
     osc1Gui.typeMenuValue = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.treeState, OSC1_TYPE_ID, osc1Gui.typeMenu);
@@ -51,10 +51,10 @@ void BasicSubtractiveSynthAudioProcessorEditor::resized()
     const int componentWidth = 200;
     const int componentHeight = 200;
     
-    osc1Gui.setBounds(0.0f, 0.0f, componentWidth, componentHeight);
-    osc2Gui.setBounds(0.0f, componentHeight, componentWidth, componentHeight);
-    osc3Gui.setBounds(0.0f, componentHeight * 2.0f, componentWidth, componentHeight);
-    mixerGui.setBounds(componentWidth, 100.0f, componentWidth, componentHeight * 2.0f);
-    fltGui.setBounds(componentWidth * 2.0f, componentHeight / 2.0f, componentWidth, componentHeight);
-    envGui.setBounds(componentWidth * 2.0f, componentHeight * 1.5f, componentWidth, componentHeight);
+    osc1Gui.setBounds(0.0f, 0.0f, componentWidth, componentHeight * 0.666f);
+    osc2Gui.setBounds(0.0f, componentHeight * 0.666f, componentWidth, componentHeight * 0.666f);
+    osc3Gui.setBounds(0.0f, componentHeight * 1.333f, componentWidth, componentHeight * 0.666f);
+    mixerGui.setBounds(componentWidth, 0.0f, componentWidth, componentHeight * 2.0f);
+    fltGui.setBounds(componentWidth * 2.0f, 0.0f, componentWidth, componentHeight);
+    envGui.setBounds(componentWidth * 2.0f, componentHeight, componentWidth, componentHeight);
 }
