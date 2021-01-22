@@ -54,7 +54,7 @@ void BasicSubtractiveSynthAudioProcessorEditor::resized()
     osc1Gui.setBounds(0.0f, 0.0f, componentWidth, componentHeight * 0.666f);
     osc2Gui.setBounds(0.0f, componentHeight * 0.666f, componentWidth, componentHeight * 0.666f);
     osc3Gui.setBounds(0.0f, componentHeight * 1.333f, componentWidth, componentHeight * 0.666f);
-    mixerGui.setBounds(componentWidth, 0.0f, componentWidth, componentHeight * 2.0f);
+    mixerGui.setBounds(componentWidth, 5.0f, componentWidth, componentHeight * 2.0f);
     fltGui.setBounds(componentWidth * 2.0f, 0.0f, componentWidth, componentHeight);
-    envGui.setBounds(componentWidth * 2.0f, componentHeight, componentWidth, componentHeight);
+    envGui.setBounds(componentWidth * 2.0f, componentHeight + 15.0f, componentWidth, componentHeight);
 }
