@@ -37,6 +37,11 @@ void FilterView::paint (juce::Graphics& g)
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
     g.drawText("Filter", titleArea, juce::Justification::centredTop);
+    
+    // TODO: Draw these in an anchored way instead of static so they resize on window drag properly
+    g.drawText("Type", 75, 38, 50, 20, juce::Justification::centredTop);
+    g.drawText("Cutoff", 40, 88, 50, 20, juce::Justification::centredTop);
+    g.drawText("Resonance", 100, 88, 70, 20, juce::Justification::centredTop);
 
     juce::Rectangle<float> area(25, 25, 150, 150);
 
@@ -48,6 +53,7 @@ void FilterView::resized()
 {
     juce::Rectangle<int> area = getLocalBounds().reduced(40);
 
+    area.removeFromTop(15);
     typeMenu.setBounds(area.removeFromTop(20));
     cutoffSlider.setBounds(30, 100, 70, 70);
     resonanceSlider.setBounds(100, 100, 70, 70);
